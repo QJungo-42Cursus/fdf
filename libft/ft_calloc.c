@@ -6,32 +6,22 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 20:52:01 by qjungo            #+#    #+#             */
-/*   Updated: 2022/07/11 20:52:01 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/27 10:08:33 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #ifndef SIZE_MAX
-// # ifdef __SIZE_MAX__
-// #  define SIZE_MAX __SIZE_MAX__
-// # endif
-// #endif
 #include <unistd.h>
 #include <stdlib.h>
+#include "libft.h"
+#ifndef SIZE_MAX
+# ifdef __SIZE_MAX__
+#  define SIZE_MAX __SIZE_MAX__
+# elif
+#  define SIZE_MAX 18446744073709551615
+# endif
+#endif
 
-static void	*ft_memset(void *s, int c, size_t n)
-{
-	unsigned char	*v;
-	size_t			i;
-
-	v = (unsigned char *)s;
-	i = 0;
-	while (i < n)
-	{
-		v[i++] = (unsigned char)c;
-	}
-	return ((void *)v);
-}
-
+// TODO clarifier pourquoi les SIZE_MAX sont utiles ?
 void	*ft_calloc(size_t nmem, size_t size)
 {
 	unsigned char		*res;

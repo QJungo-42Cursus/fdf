@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 10:48:49 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/19 11:39:04 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/27 10:09:21 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ char	*char_to_str(char c)
 	if (res == NULL)
 		return (NULL);
 	res[0] = c;
-	res[1] = 0;
+	res[1] = '\0';
 	return (res);
 }

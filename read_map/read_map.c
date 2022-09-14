@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/26 12:59:30 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/27 11:27:33 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	read_map(const char *path, t_map *map)
 		map->y_size++;
 	}
 
-	log_print_map(start_lines_list, *map);
+	//log_print_map(start_lines_list, *map);
 
 	int		y;
 	y = 0;
@@ -109,7 +109,7 @@ int	read_map(const char *path, t_map *map)
 		y++;
 	}
 
-	log_final_map(*map);
+	//log_final_map(*map);
 	return (0);
 }
 

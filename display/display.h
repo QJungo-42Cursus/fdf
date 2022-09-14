@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/26 16:27:41 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/27 12:02:08 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ typedef struct	s_img_data {
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
-	int		endian;
-}				t_img_data;
+	int		endian; // Pour l'instant seulement utile dans "mlx get adrr"
+	
+	//	Taille de l'image
+	int		x_size;
+	int		y_size;
+}	t_img_data;
 
 /// ?
 ///
@@ -80,7 +84,7 @@ enum e_key {
 
 void	draw_line(t_img_data *img, t_line_data line);
 void	display(t_map map);
-void	pixel_to_image(t_img_data *data, int x, int y, int color);
+void	pixel_to_image(t_img_data *img, t_vec2 point, int color);
 int		close_on_esc(int key, t_mlx *mlx);
 int		close_on_destroy(t_mlx *mlx);
 

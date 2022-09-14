@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/26 16:25:45 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/27 11:34:49 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,21 @@ float	ordonnate_to_origin(float x, float y, float m)
 	return (y - m * x);
 }
 
-t_vec2	new_vec2(int x, int y)
+t_vec2	new_vec2(float x, float y)
 {
 	t_vec2	new;
 
 	new.x = x;
 	new.y = y;
+	return (new);
+}
+
+t_vec3	new_vec3(float x, float y, float z)
+{
+	t_vec3	new;
+
+	new.x = x;
+	new.y = y;
+	new.z = z;
 	return (new);
 }
