@@ -1,5 +1,10 @@
 #include "fdf.h"
 #include "libft/libft.h"
+#include "read_map/read_map.h"
+#include "display/display.h"
+#include "minilibx_macos/mlx.h"
+
+
 
 static int	chec_args(int argc, char **argv)
 {
@@ -26,17 +31,17 @@ static int	chec_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	int		errno;
+	int		s_errno;
+	t_map	map;
 
 	if (chec_args(argc, argv))
 		return (0);
-	errno = read_file(argv[1]);
-	if(errno)
+	s_errno = read_map(argv[1], &map);
+	if(s_errno)
 	{
-		ft_printf("Erreur %i lors de la lecture de la map (%s)", errno, argv[1]); 
+		ft_printf("Erreur %i lors de la lecture de la map (%s)", s_errno, argv[1]); 
 		return (0);
 	}
-
-
+	display(map);
 	return (0);
 }

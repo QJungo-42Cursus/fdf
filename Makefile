@@ -1,33 +1,46 @@
 NAME =		fdf
-
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror
+# TODO le -lm ajoute les fonctions mathematiques	
+CFLAGS =	-Wall -Wextra -Werror #-lm
 RM =		rm -f
 SRCS =		main.c \
-			read_file.c
+			read_map/read_map.c \
+			read_map/log.c \
+			display/display.c \
+			display/pixel_to_image.c \
+			display/event.c \
+			display/draw_line.c \
+			ft_math/line.c
+
+#%.o: %.c
+#	$(CC) $(CFLAGS) -Imlx -c $< -o $@
+
 OBJS =		$(SRCS:.c=.o)
 
 all: $(NAME)
 
-# TODO : attention ca relink la libft !! (ou pas ?)
-libft:
-	cd ./libft/ && make bonus
-
 $(NAME): $(OBJS)
-	make libft
-	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
+	@make bonus -C libft
+	@make -C minilibx_macos
+	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
-	cd ./libft/ && make clean
+	@make clean -C libft
+	@make clean -C minilibx_macos 
 	$(RM) $(OBJS)
 
 fclean: clean
-	cd ./libft/ && make fclean
+	@make fclean -C libft
 	$(RM) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re libft
 
-test: re
-	./fdf
+test: $(OBJS)
+	@make libft
+	$(CC) $(CFLAGS) -g $(OBJS) -L./libft -lft -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
+	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-70.fdf
+	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
+	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf

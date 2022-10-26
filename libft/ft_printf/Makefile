@@ -16,7 +16,7 @@ NAME =		libftprintf.a
 all: ${NAME}
 
 libft:
-	cd ./libft/ && make bonus
+	make bonus -C libft
 	cp ./libft/libft.a $(NAME)
 
 $(NAME): $(OBJS)
