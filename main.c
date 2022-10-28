@@ -29,6 +29,7 @@ static int	chec_args(int argc, char **argv)
 	return (0);
 }
 
+
 int	main(int argc, char **argv)
 {
 	int		s_errno;
@@ -42,6 +43,7 @@ int	main(int argc, char **argv)
 		ft_printf("Erreur %i lors de la lecture de la map (%s)", s_errno, argv[1]); 
 		return (0);
 	}
+	create_edges(&map);
 	display(map);
 	return (0);
 }

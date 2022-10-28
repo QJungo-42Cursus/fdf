@@ -6,37 +6,36 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/27 11:34:49 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/28 15:16:49 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_math/ft_math.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 float	slope(t_vec2 a, t_vec2 b)
 {
-	return ((b.y - a.y) / (b.x - a.x));
+	float	m;
+
+	m = (b.y - a.y) / (b.x - a.x);
+	return (m);
 }
 
 float	ordonnate_to_origin(float x, float y, float m)
 {
-	return (y - m * x);
+	float	b;
+
+	if (isinf(m))
+		return (x); // TODO c'est faux mathematiquemetn ..
+	b = y - m * x;
+	if (isnan(b))
+	{
+		printf("is nan ! %f - %f * %f", y, m, x);
+		//exit(4);
+		b = 0;
+	}
+	return (b);
 }
 
-t_vec2	new_vec2(float x, float y)
-{
-	t_vec2	new;
-
-	new.x = x;
-	new.y = y;
-	return (new);
-}
-
-t_vec3	new_vec3(float x, float y, float z)
-{
-	t_vec3	new;
-
-	new.x = x;
-	new.y = y;
-	new.z = z;
-	return (new);
-}

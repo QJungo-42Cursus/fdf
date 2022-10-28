@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/27 12:02:08 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/28 11:06:08 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ typedef struct	s_img_data {
 	int		y_size;
 }	t_img_data;
 
-/// ?
-///
-///
 
 
 typedef struct	s_line_data {

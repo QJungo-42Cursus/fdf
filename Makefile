@@ -6,12 +6,15 @@ LIBFT =		-L./libft -lft
 SRCS =		main.c \
 			read_map/read_map.c \
 			read_map/log.c \
+			read_map/create_edges.c \
 			display/display.c \
 			display/pixel_to_image.c \
 			display/event.c \
 			display/draw_line.c \
 			ft_math/line.c \
-			ft_math/vec.c
+			ft_math/vec.c \
+			ft_math/new_.c
+
 OBJS =		$(SRCS:.c=.o)
 
 
@@ -62,8 +65,10 @@ else
 	$(CC) $(CFLAGS) -g $(OBJS) $(LIBFT) $(MAC_L) -o $(NAME)
 endif
 	clear
-	./fdf test_maps/100-6.fdf
+	./fdf test_maps/tq1.fdf
+	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/tq1.fdf
+	#./fdf test_maps/10-70.fdf
+	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
 	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/100-6.fdf
 	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-70.fdf
-	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
 	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
