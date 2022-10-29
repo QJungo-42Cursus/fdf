@@ -13,7 +13,11 @@ SRCS =		main.c \
 			display/draw_line.c \
 			ft_math/line.c \
 			ft_math/vec.c \
-			ft_math/new_.c
+			ft_math/new_.c \
+			ft_math/matrix.c \
+			projection/projection.c \
+			projection/iso_matrix.c
+
 
 OBJS =		$(SRCS:.c=.o)
 

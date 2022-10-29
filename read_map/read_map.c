@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 14:03:29 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/28 23:10:25 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static int	line_to_vertices(char ***words, t_map *map, int *i, int y)
 	x = 0;
 	while ((*words)[x] && (*words)[x][0] != '\n')
 	{
-		map->vertices[*i] = new_vertice(new_vec3(x, y, ft_atoi((*words)[x])));
-		map->vertices[*i] = new_vertice(new_vec3(x, y, ft_atoi((*words)[x])));
+		map->vertices[*i] = new_vec3(x, y, ft_atoi((*words)[x]));
+		map->vertices[*i] = new_vec3(x, y, ft_atoi((*words)[x]));
 		free((*words)[x]);
 		x++;
 		(*i)++;
@@ -114,7 +114,7 @@ int	read_map(const char *path, t_map *map)
 	start_lines_list = NULL;
 	get_lines(fd, &start_lines_list, map);
 	map->x_size = get_x_size(start_lines_list);
-	map->vertices = malloc(sizeof(t_vertice) * (map->x_size * map->y_size));
+	map->vertices = malloc(sizeof(t_vec3) * (map->x_size * map->y_size));
 	parse_lines(&start_lines_list, map);
 
 	//log_final_map(map);

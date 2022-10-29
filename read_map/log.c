@@ -6,19 +6,12 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 10:09:21 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 14:08:33 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/29 00:35:24 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../libft/libft.h"
 #include"../fdf.h"
-
-
-void	log_vertice(t_vertice vertice)
-{
-	printf("Position : {%f, %f, %f}\n", vertice.position.x, vertice.position.y, vertice.position.z);
-}
-
 
 void	log_print_map(t_list *start_lines_list, t_map map)
 {
@@ -47,15 +40,11 @@ void	log_final_map(t_map *map)
 	i = 0;
 	while (i < map->y_size * map->x_size)
 	{
-			log_vertice(map->vertices[i]);
+			log_vec3(map->vertices[i]);
 			i++;
 	}
 }
 
-void	log_vec2(t_vec2 v)
-{
-	printf("{%f, %f}\n", v.x, v.y);
-}
 
 void	log_edges(t_map *map)
 {
@@ -64,8 +53,8 @@ void	log_edges(t_map *map)
 	i = 0;
 	while (i < map->n_edges)
 	{
-		log_vertice(*map->edges[i].a);
-		log_vertice(*map->edges[i].b);
+		log_vec3(map->vertices[map->edges[i].a]);
+		log_vec3(map->vertices[map->edges[i].b]);
 		ft_printf("\n");
 		i++;
 	}

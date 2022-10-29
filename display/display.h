@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 11:06:08 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/29 00:23:16 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ enum e_key {
 ///
 
 void	draw_line(t_img_data *img, t_line_data line);
-void	display(t_map map);
+void	display(t_map *map);
 void	pixel_to_image(t_img_data *img, t_vec2 point, int color);
 int		close_on_esc(int key, t_mlx *mlx);
 int		close_on_destroy(t_mlx *mlx);

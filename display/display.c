@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 16:02:04 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/10/29 00:39:35 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 #include "../display/display.h"
 #include "../minilibx_macos/mlx.h"
 #include "../ft_math/ft_math.h"
+#include "../projection/projection.h"
 
-void	disp_edge(t_map map, t_img_data *img)
+#define LOGd
+void	disp_edge(t_map *map, t_img_data *img)
 {
 	int			i;
 	t_line_data	line;
@@ -26,14 +28,24 @@ void	disp_edge(t_map map, t_img_data *img)
 	t_vec2		a;
 	t_vec2		b;
 
+
+	t_vec2 *pro;
+	// TODO wtf pk ca plante ???
+	pro = projection(map);
+	(void)pro;
+
 	i = 0;
-	int scale = 40;
-	while (i < map.n_edges)
+	int scale = 10;
+	while (i < map->n_edges)
 	{
-		a = map.edges[i].a->projection;
+		//a = vec3_to2(map->vertices[map->edges[i].a]);
+		//b = vec3_to2(map->vertices[map->edges[i].b]);
+		a = pro[map->edges[i].a];
+		b = pro[map->edges[i].b];
+		log_vec2(a);
+		log_vec2(b);
 		a.x *= scale;
 		a.y *= scale;
-		b = map.edges[i].b->projection;
 		b.x *= scale;
 		b.y *= scale;
 		line.p_a = a;
@@ -51,7 +63,7 @@ void	disp_edge(t_map map, t_img_data *img)
 	}
 }
 
-void	display(t_map map)
+void	display(t_map *map)
 {
 	(void)map;
 	t_mlx		mlx;

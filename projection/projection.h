@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_.c                                             :+:      :+:    :+:   */
+/*   projection.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 13:21:12 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 23:08:05 by qjungo           ###   ########.fr       */
+/*   Created: 2022/10/28 19:18:21 by qjungo            #+#    #+#             */
+/*   Updated: 2022/10/29 00:24:33 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_math.h"
+#ifndef PROJECTION_H
+# define PROJECTION_H
 
-t_edge	new_edge(int a, int b)
-{
-	t_edge	n;
+#include "../ft_math/ft_math.h"
+#include "../fdf.h"
 
-	n.a = a;
-	n.b = b;
-	return (n);
-}
+t_matrix	iso_matrix(float alpha, float beta);
+t_vec2		*projection(t_map *map);
 
+#endif /* PROJECTION_H */
