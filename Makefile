@@ -15,6 +15,7 @@ SRCS =		main.c \
 			ft_math/vec.c \
 			ft_math/new_.c \
 			ft_math/matrix.c \
+			ft_math/geometrie.c \
 			projection/projection.c \
 			projection/iso_matrix.c
 
