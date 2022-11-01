@@ -5,11 +5,11 @@ RM =		rm -f
 LIBFT =		-L./libft -lft
 SRCS =		main.c \
 			read_map/read_map.c \
-			read_map/log.c \
 			read_map/create_edges.c \
 			projection/display.c \
 			projection/projection.c \
-			projection/iso_matrix.c
+			projection/iso_matrix.c \
+			log.c
 
 
 OBJS =		$(SRCS:.c=.o)
