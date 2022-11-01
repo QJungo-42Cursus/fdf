@@ -5,51 +5,6 @@
 #include "minilibx_macos/mlx.h"
 #include "projection/projection.h"
 
-
-static int	test(int run)
-{
-	if (!run)
-		return (0);
-	printf("%f \n\n", asin(0.57735));
-	float dg_rad = 30 * 2 * M_PI / 360;
-	printf("%f \n\n", tan(dg_rad));
-	t_matrix uu = iso_matrix(35.264, 45);
-	log_matrix(uu);
-	return (1);
-
-	float	**yo;
-	// [y][x]
-	yo = malloc(sizeof(float *) * 3);
-	yo[0] = malloc(sizeof(float) * 2);
-	yo[0][0] = 1;
-	yo[0][1] = 2;
-	yo[1] = malloc(sizeof(float) * 2);
-	yo[1][0] = 0;
-	yo[1][1] = 4;
-	yo[2] = malloc(sizeof(float) * 2);
-	yo[2][0] = 3;
-	yo[2][1] = -1;
-
-	t_matrix m = new_matrix(yo, 2, 3);
-	log_matrix(m);
-
-	float	**yg;
-	// [y][x]
-	yg = malloc(sizeof(float *) * 2);
-	yg[0] = malloc(sizeof(float) * 2);
-	yg[0][0] = 2;
-	yg[0][1] = 0;
-	yg[1] = malloc(sizeof(float) * 2);
-	yg[1][0] = 1;
-	yg[1][1] = -3;
-	t_matrix n = new_matrix(yg, 2, 2);
-	log_matrix(n);
-
-	t_matrix o = matrix_product(m, n);
-	log_matrix(o);
-	return (1);
-}
-
 static int	chec_args(int argc, char **argv)
 {
 	int		len;
@@ -73,31 +28,28 @@ static int	chec_args(int argc, char **argv)
 	return (0);
 }
 
-
 int	main(int argc, char **argv)
 {
-	int		s_errno;
 	t_map	*map;
 
+	if (chec_args(argc, argv))
+		return (0);
 	map = malloc(sizeof(t_map));
 	if (map == NULL)
 	{
-		// TODO
+		ft_printf("Erreur lors de l'allocation de memoire de \"map\""); 
 		return (0);
 	}
-	if (test(0))
-		return (0);
-	if (chec_args(argc, argv))
-		return (0);
-	s_errno = read_map(argv[1], map);
-	if(s_errno)
+	if (read_map(argv[1], map))
 	{
-		ft_printf("Erreur %i lors de la lecture de la map (%s)", s_errno, argv[1]); 
+		free(map);
+		ft_printf("Erreur lors de la lecture de la map (%s)", argv[1]); 
 		return (0);
 	}
 	create_edges(map);
-
-
 	display(map);
+	free(map->vertices);
+	free(map->edges);
+	free(map);
 	return (0);
 }

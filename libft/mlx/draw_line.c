@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:11:28 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 19:37:23 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "ft_mlx.h"
 #include "../libft.h"
 
-//#define LOG
 
 static int	check_max(float x, float y, t_img_data img)
 {
@@ -32,9 +31,8 @@ static void	first_calculs(t_line *line, t_vec2 *pixel, t_droite *droite)
 	pixel->y = line->a.y;
 	droite->m = slope(line->a, line->b);
 	droite->b = ordonnate_to_origin(pixel->x, pixel->y, droite->m);
-	// TODO meilleur algo pour le choix de l'incrément
 	droite->move_factor = 0.001f;
-	if (line->a.x > line->b.x) // TODO ca marche mais j'aurais mis dans l'autre sens...
+	if (line->a.x > line->b.x)
 		droite->move_factor = -0.001f;
 }
 
@@ -46,8 +44,8 @@ static void	loop(t_vec2 pixel, t_line line, t_droite droite, t_img_data *img)
 	while (!assert_rounded_vec2(pixel, line.b))
 	{
 #ifdef LOG
-		printf("start : [ {%f, %f},", line.p_a.x, line.p_a.y);
-		printf("{%f, %f} ] -  ", line.p_b.x, line.p_b.y);
+		printf("start : [ {%f, %f},", line.a.x, line.a.y);
+		printf("{%f, %f} ] -  ", line.b.x, line.b.y);
 		printf("{%f, %f}\n", pixel.x, pixel.y);
 #endif
 		// Do the calculation
@@ -65,18 +63,28 @@ static void	loop(t_vec2 pixel, t_line line, t_droite droite, t_img_data *img)
 	}
 }
 
-static void	inf_loop(t_vec2 pixel, t_line line, t_img_data *img)
-{
-	while (pixel.y != line.b.y)
-	{
-		// Do the calculation
-		pixel.y = pixel.y + 1;
 
-		// Prevent from going further than the image // TODO rendre dynamic
+#define LOG
+static void	inf_loop(t_vec2 pixel, t_line line, t_img_data *img, t_bool is_y)
+{
+	(void) is_y;
+	printf("YEEE\n\n");
+	while (1)
+	{
+		pixel.y++;
+#ifdef LOG
+		log_vec2(pixel); log_vec2(line.b);
+		printf("{%f; %f} isame %d\n", pixel.x, line.b.x, pixel.x == line.b.x);
+		//printf("slope : %f, oto : %f\n", droite.m, droite.b);
+#endif
+		if (round(pixel.x) != round(line.b.x))
+			break ;
 		if (check_max(pixel.x, pixel.y, *img))
-			break;
+			break ;
 		pixel_to_image(img, pixel, line.color );
 	}
+	printf("\n..\n\n");
+	return ;
 }
 
 void	draw_line(t_img_data *img, t_line line)
@@ -86,12 +94,15 @@ void	draw_line(t_img_data *img, t_line line)
 	
 	first_calculs(&line, &pixel, &droite);
 #ifdef LOG
-	printf("{%f; %f}\n", line.p_a.x, line.p_a.y);
-	printf("{%f; %f}\n", line.p_b.x, line.p_b.y);
+	printf("{%f; %f}\n", line.a.x, line.a.y);
+	printf("{%f; %f}\n", line.b.x, line.b.y);
 	printf("slope : %f, oto : %f\n", droite.m, droite.b);
 #endif
+	//loop(pixel, line, droite, img);
+//		return ;
+	//if (isinf(droite.m) || droite.m == -0.0f || droite.m == 0.0f || isnan(droite.m))
 	if (isinf(droite.m))
-		inf_loop(pixel, line, img);
+		inf_loop(pixel, line, img, TRUE);
 	else
 		loop(pixel, line, droite, img);
 }

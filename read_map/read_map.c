@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:24:03 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:41:40 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 #include "read_map.h"
 #include "../fdf.h"
 #include "../libft/libft.h"
-
-static int	fail(t_list **list)
-//	Free tous ce qui a ete alloue (les string, les noeus, ...)
-{
-	(void)list;
-	return (2);
-}
 
 static int	get_lines(int fd, t_list **start_lines_list, t_map *map)
 {
@@ -34,7 +27,10 @@ static int	get_lines(int fd, t_list **start_lines_list, t_map *map)
 			break ;
 		new_node = ft_lstnew((void *)line);
 		if (new_node == NULL)
-			return (fail(start_lines_list));
+		{
+			ft_lstclear(start_lines_list, free);
+			return (1);
+		}
 		ft_lstadd_back(start_lines_list, new_node);
 		map->y_size++;
 	}
@@ -47,12 +43,15 @@ static int	get_x_size(t_list *line)
 	int		size;
 
 	words = ft_split((char *)line->content, ' ');
+	if (words == NULL)
+		return (0);
 	size = 0;
 	while (words[size] && words[size][0] != '\n')
 	{
 		free(words[size]);
 		size++;
 	}
+	free(words[size]);
 	free(words);
 	return (size);
 }
@@ -70,6 +69,7 @@ static int	line_to_vertices(char ***words, t_map *map, int *i, int y)
 		x++;
 		(*i)++;
 	}
+	free((*words)[x]);
 	free(*words);
 	return (0);
 }
@@ -89,7 +89,10 @@ static int	parse_lines(t_list **start_lines_list, t_map *map)
 	{
 		words = ft_split((char *)node->content, ' ');
 		if (words == NULL)
-			return (fail(start_lines_list));
+		{
+			ft_lstclear(&node, free);
+			return (1);
+		}
 		line_to_vertices(&words, map, &i, y);
 		y++;
 		l_node = node;
@@ -111,13 +114,26 @@ int	read_map(const char *path, t_map *map)
 	map->x_size = 0;
 	map->y_size = 0;
 	start_lines_list = NULL;
-	get_lines(fd, &start_lines_list, map);
+	if (get_lines(fd, &start_lines_list, map))
+	{
+		ft_lstclear(&start_lines_list, free);
+		return (1);
+	}
 	map->x_size = get_x_size(start_lines_list);
-	map->vertices = malloc(sizeof(t_vec3) * (map->x_size * map->y_size));
-	parse_lines(&start_lines_list, map);
+	if (map->x_size == 0)
+	{
+		ft_lstclear(&start_lines_list, free);
+		return (2);
+	}
 	map->size = map->x_size * map->y_size;
-
-	//log_final_map(map);
+	map->vertices = malloc(sizeof(t_vec3) * (map->x_size * map->y_size));
+	if (map->vertices == NULL)
+	{
+		free(map->vertices);
+		ft_lstclear(&start_lines_list, free);
+		return (3);
+	}
+	parse_lines(&start_lines_list, map);
 	return (0);
 }
 

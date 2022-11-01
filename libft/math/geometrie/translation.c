@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:13:07 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 14:34:35 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 21:59:07 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@ void	translation_2d(t_vec2 *vertices, int length, t_vec2 vec)
 	int			y;
 	t_matrix	translation_matrix;
 	t_matrix	new_matrix;
+	t_matrix	tmp;
 	
 	y = 0;
 	while (y < length)
 	{
 		translation_matrix = vec2_to_matrix(vertices[y]);
-		new_matrix = matrix_addition(translation_matrix, vec2_to_matrix(vec));
+		tmp = vec2_to_matrix(vec);
+		new_matrix = matrix_addition(translation_matrix, tmp);
 		vertices[y] = matrix_to_vec2(new_matrix);
 		free_matrix(translation_matrix);
+		free_matrix(tmp);
 		free_matrix(new_matrix);
 		y++;
 	}

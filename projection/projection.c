@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:21:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 16:41:31 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 22:17:32 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,19 @@ t_vec2	*projection(t_map *map, t_view view)
 	t_vec2		*proj;
 
 	map_copy = copy_vec3_list(map->vertices, map->size);
-	map_rotation_z(map_copy, map->size, view.angle.z);
-	map_rotation_x(map_copy, map->size, view.angle.x);
-
+	rotation_3d(map_copy, map->size, view.angle.z, 'z');
+	rotation_3d(map_copy, map->size, view.angle.x, 'x');
 	if (view.perspective)
+	{
 		proj = perspective(map_copy, map->size, view);
+		map_scale(proj, map->size, view.scale * view.distance);
+	}
 	else
+	{
 		proj = copy_vec3_list_to2(map_copy, map->size);
-
-	map_scale(proj, map->size, view.scale * view.distance);
+		map_scale(proj, map->size, view.scale);
+	}
 	translation_2d(proj, map->size, view.mov);
+	free(map_copy);
 	return (proj);
 }

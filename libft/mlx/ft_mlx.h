@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 16:55:22 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 20:24:51 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	draw_line(t_img_data *img, t_line line);
 void	pixel_to_image(t_img_data *img, t_vec2 point, int color);
 t_line	new_line(t_vec2 a, t_vec2 b, int color, int thickness);
 
-
-/// EVENT HANDLING ///
+/// EVENT HANDLING
 
 typedef enum e_event_type {
 	ON_KEYDOWN = 2,
@@ -58,9 +57,6 @@ typedef enum e_event_type {
 	ON_DESTROY = 17,
 	ON_RESIZE = 25, // TODO request en vrai
 }	t_event_type;
-
-int		close_on_esc(int key, t_mlx *mlx);
-int		close_on_destroy(t_mlx *mlx);
 
 typedef enum e_key {
 	KEY_ESC = 53,

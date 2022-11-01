@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:18:04 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 14:23:55 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 22:07:29 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ float		deg_to_rad(float deg);
 float		rad_to_deg(float rad);
 
 //			operations sur des listes de points
-//			TODO simplifier
-void		map_rotation_x(t_vec3 *points, int length, float angle);
-void		map_rotation_y(t_vec3 *points, int length, float angle);
-void		map_rotation_z(t_vec3 *points, int length, float angle);
+void		rotation_3d(t_vec3 *points, int length, float angle, char axe);
 void		map_scale(t_vec2 *points, int length, float scale);
 
 //			translation (mouvment)

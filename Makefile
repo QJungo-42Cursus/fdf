@@ -9,6 +9,9 @@ SRCS =		main.c \
 			projection/display.c \
 			projection/projection.c \
 			projection/iso_matrix.c \
+			projection/render.c \
+			hooks/key.c \
+			hooks/close.c \
 			log.c
 
 
@@ -63,9 +66,9 @@ else
 endif
 	clear
 	./fdf test_maps/tq1.fdf
-	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/tq1.fdf
-	#./fdf test_maps/10-70.fdf
-	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
-	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/100-6.fdf
-	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-70.fdf
-	#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
+#@lldb --batch -K lldb.batch -o run ./fdf test_maps/tq1.fdf
+#./fdf test_maps/10-70.fdf
+#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
+#@lldb --batch -K lldb.batch -o run ./fdf test_maps/100-6.fdf
+#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-70.fdf
+#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
