@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   assert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 13:12:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:22:15 by qjungo           ###   ########.fr       */
+/*   Created: 2022/10/27 12:35:34 by qjungo            #+#    #+#             */
+/*   Updated: 2022/11/01 14:01:36 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include "libft/libft.h"
+#include <math.h>
+#include "vec.h"
 
-typedef struct s_map {
-	int			x_size;
-	int			y_size;
-	int			size;
-	t_vec3		*vertices;	
-	t_edge		*edges;
-	int			n_edges;
-}	t_map;
-
-#endif /* FDF_H */
+int	assert_rounded_vec2(t_vec2 a, t_vec2 b) // variadic ??
+{
+	return ((round(a.x) == round(b.x)) && (round(a.y) == round(b.y)));
+}

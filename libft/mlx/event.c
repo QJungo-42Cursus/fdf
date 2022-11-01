@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line.c                                             :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 15:16:49 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:12:40 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_math/ft_math.h"
-#include <math.h>
-#include <stdio.h>
+#include "./mlx.h"
+#include "ft_mlx.h"
 #include <stdlib.h>
 
-float	slope(t_vec2 a, t_vec2 b)
+/// Close window and quit programme
+/// This must be called after freeing ??? TODO
+/// Have to return a int to fit the function pointer
+int		close_on_esc(int key, t_mlx *mlx)
 {
-	float	m;
-
-	m = (b.y - a.y) / (b.x - a.x);
-	return (m);
+	if (key != ESC)
+		return (0);
+	mlx_destroy_window(mlx->self, mlx->win);
+	exit(0);
+	return (0);
 }
 
-float	ordonnate_to_origin(float x, float y, float m)
+/// Same but on destroy
+int		close_on_destroy(t_mlx *mlx)
 {
-	float	b;
-
-	if (isinf(m))
-		return (x); // TODO c'est faux mathematiquemetn ..
-	b = y - m * x;
-	if (isnan(b))
-	{
-		printf("is nan ! %f - %f * %f", y, m, x);
-		//exit(4);
-		b = 0;
-	}
-	return (b);
+	mlx_destroy_window(mlx->self, mlx->win);
+	exit(0);
+	return (0);
 }
-

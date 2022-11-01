@@ -6,11 +6,11 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 20:52:54 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 13:04:50 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:46:00 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "str.h"
 
 static int	ft_is_in_charset(char c, const char *charset)
 {

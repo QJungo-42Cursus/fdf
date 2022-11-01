@@ -7,17 +7,7 @@ SRCS =		main.c \
 			read_map/read_map.c \
 			read_map/log.c \
 			read_map/create_edges.c \
-			display/display.c \
-			display/line.c \
-			display/pixel_to_image.c \
-			display/event.c \
-			display/draw_line.c \
-			ft_math/line.c \
-			ft_math/vec.c \
-			ft_math/new_.c \
-			ft_math/matrix.c \
-			ft_math/geometrie.c \
-			ft_math/translation.c \
+			projection/display.c \
 			projection/projection.c \
 			projection/iso_matrix.c
 

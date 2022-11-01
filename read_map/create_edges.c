@@ -6,13 +6,12 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 13:36:17 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 23:11:43 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:24:12 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../fdf.h"
-#include "../ft_math/ft_math.h"
 
 int	create_edges(t_map *map)
 {

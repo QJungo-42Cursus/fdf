@@ -6,18 +6,17 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 11:47:22 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:11:28 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "../display/display.h"
-#include "../ft_math/ft_math.h"
+#include <stdlib.h>
+#include "ft_mlx.h"
+#include "../libft.h"
 
 //#define LOG
 
-#include <stdio.h>
-#include <stdlib.h>
 static int	check_max(float x, float y, t_img_data img)
 {
 	if (x < 0 || y < 0)
@@ -80,7 +79,6 @@ static void	inf_loop(t_vec2 pixel, t_line line, t_img_data *img)
 	}
 }
 
-//#include<stdlib.h>
 void	draw_line(t_img_data *img, t_line line)
 {
 	t_droite	droite;

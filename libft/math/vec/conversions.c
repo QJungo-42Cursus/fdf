@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   converstion.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 13:12:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:22:15 by qjungo           ###   ########.fr       */
+/*   Created: 2022/10/27 12:35:34 by qjungo            #+#    #+#             */
+/*   Updated: 2022/11/01 13:57:55 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include "libft/libft.h"
+#include "vec.h"
 
-typedef struct s_map {
-	int			x_size;
-	int			y_size;
-	int			size;
-	t_vec3		*vertices;	
-	t_edge		*edges;
-	int			n_edges;
-}	t_map;
+t_vec2	vec3_to2(t_vec3 v)
+{
+	t_vec2	n;
 
-#endif /* FDF_H */
+	n.x = v.x;
+	n.y = v.y;
+	return (n);
+}
+
+t_vec3	vec2_to3(t_vec2 v)
+{
+	t_vec3	n;
+
+	n.x = v.x;
+	n.y = v.y;
+	n.z = 0;
+	return (n);
+}

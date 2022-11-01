@@ -1,46 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   geometrie.c                                        :+:      :+:    :+:   */
+/*   map_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:17:02 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 12:04:49 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:29:45 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "ft_math.h"
+#include "../vec/vec.h"
+#include "../ft_math.h"
 
-// Grace au théorème de Pythagore,
-// on peut calculer la distance entre deux points
-float  distance(t_vec2 a, t_vec2 b)
-{
-	return (sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2)));
-}
-
-t_vec2 pos_from_distance(t_vec2 a, float distance, float angle)
-{
-	t_vec2	b;
-
-	b.x = a.x + distance * cos(angle);
-	b.y = a.y + distance * sin(angle);
-	return (b);
-}
-
-// degree to radian
 float  deg_to_rad(float deg)
 {
 	return (deg * M_PI / 180);
 }
 
-// radian to degree
 float  rad_to_deg(float rad)
 {
 	return (rad * 180 / M_PI);
 }
-
 
 t_vec3	rotation_z(t_vec3 point, float angle)
 {
@@ -112,7 +94,42 @@ t_vec3 rotation_x(t_vec3 point, float angle)
 	free_matrix(rotation_matrix);
 	return (res);
 }
+// vector rotation
+/*
+ * TODO de quel axe part la rotation ?
+t_vec2	rotate_vec2(t_vec2 a, float angle)
+{
+	t_vec2	b;
 
+	b.x = a.x * cos(angle) - a.y * sin(angle);
+	b.y = a.x * sin(angle) + a.y * cos(angle);
+	return (b);
+}
+*/
+
+void	vec3_foreach(t_vec3 *a, int length, t_vec3 (*f)(t_vec3))
+{
+	int		i;
+
+	i = 0;
+	while (i < length)
+	{
+		a[i] = f(a[i]);
+		i++;
+	}
+}
+
+void	vec2_foreach(t_vec2 *a, int length, t_vec2 (*f)(t_vec2))
+{
+	int		i;
+
+	i = 0;
+	while (i < length)
+	{
+		a[i] = f(a[i]);
+		i++;
+	}
+}
 
 void	map_rotation_z(t_vec3 *points, int length, float angle)
 {
@@ -125,6 +142,7 @@ void	map_rotation_z(t_vec3 *points, int length, float angle)
 		i++;
 	}
 }
+
 void map_rotation_y(t_vec3 *points, int length, float angle)
 {
 	int		i;
@@ -162,15 +180,3 @@ void	map_scale(t_vec2 *points, int length, float scale)
 		i++;
 	}
 }
-// vector rotation
-/*
- * TODO de quel axe part la rotation ?
-t_vec2	rotate_vec2(t_vec2 a, float angle)
-{
-	t_vec2	b;
-
-	b.x = a.x * cos(angle) - a.y * sin(angle);
-	b.y = a.x * sin(angle) + a.y * cos(angle);
-	return (b);
-}
-*/

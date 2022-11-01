@@ -6,14 +6,13 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 11:58:24 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:24:03 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "read_map.h"
 #include "../fdf.h"
-#include "../ft_math/ft_math.h"
 #include "../libft/libft.h"
 
 static int	fail(t_list **list)

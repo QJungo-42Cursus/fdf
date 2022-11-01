@@ -6,11 +6,11 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 13:48:53 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 11:41:24 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:50:47 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h"
+#include "ft_mlx.h"
 #include <math.h>
 ///		Add a pixel to an image
 ///		This is a more optimised way than mlx_put_pixel, because it render

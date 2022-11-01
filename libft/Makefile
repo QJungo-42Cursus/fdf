@@ -67,12 +67,32 @@ SRCS_MEM =		ft_calloc.c \
 				ft_memset.c \
 				ft_memmove.c
 
+SRCS_MATH = 	geometrie/line.c \
+				geometrie/translation.c \
+				geometrie/map_op.c \
+				matrix/operations.c \
+				matrix/conversions.c \
+				matrix/new.c \
+				vec/new.c \
+				vec/copy.c \
+				vec/conversions.c \
+				vec/assert.c \
+				new_.c
+
+SRCS_MLX = 		line.c \
+				event.c \
+				line.c \
+				draw_line.c \
+				pixel_to_image.c
+
 SRCS = 			$(addprefix char/,	$(SRCS_CHAR)) \
 				$(addprefix str/,	$(SRCS_STR)) \
 				$(addprefix lst/,	$(SRCS_LST)) \
 				$(addprefix mem/,	$(SRCS_MEM)) \
 				$(addprefix nb/,	$(SRCS_NB)) \
 				$(addprefix prt/,	$(SRCS_PRT)) \
+				$(addprefix math/,	$(SRCS_MATH)) \
+				$(addprefix mlx/,	$(SRCS_MLX)) \
 				get_next_line.c
 
 OBJS =			$(SRCS:.c=.o)

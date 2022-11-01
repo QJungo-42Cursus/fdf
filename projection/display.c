@@ -6,18 +6,16 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 12:17:52 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:23:12 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "../fdf.h"
 #include "../libft/libft.h"
-#include "../read_map/read_map.h"
-#include "../display/display.h"
+//#include "../read_map/read_map.h"
 #include "../minilibx_macos/mlx.h"
-#include "../ft_math/ft_math.h"
-#include "../projection/projection.h"
+#include "projection.h"
 
 #define LOGd
 void	disp_edge(t_map *map, t_img_data *img)
@@ -29,12 +27,12 @@ void	disp_edge(t_map *map, t_img_data *img)
 	t_vec3		*pro;
 	t_vec2		*proj;
 
-	pro = copy_vec3(map->vertices, map->size);
+	pro = copy_vec3_list(map->vertices, map->size);
 
 	map_rotation_z(pro, map->size, 45);
 	map_rotation_x(pro, map->size, 45);
 
-	proj = copy_vec3_to2(pro, map->size);
+	proj = copy_vec3_list_to2(pro, map->size);
 	map_scale(proj, map->size, 50);
 	translation_2d(proj, map->size, new_vec2(500, 500));
 

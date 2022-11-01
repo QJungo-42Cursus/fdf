@@ -2,8 +2,6 @@
 #include "fdf.h"
 #include "libft/libft.h"
 #include "read_map/read_map.h"
-#include "display/display.h"
-#include "ft_math/ft_math.h"
 #include "minilibx_macos/mlx.h"
 #include "projection/projection.h"
 

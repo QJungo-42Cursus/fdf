@@ -6,11 +6,11 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 20:52:57 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 13:05:01 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:46:10 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "str.h"
 
 char	*ft_substr(char const *string, unsigned int start, size_t len)
 {

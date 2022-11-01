@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   nb.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 13:12:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:22:15 by qjungo           ###   ########.fr       */
+/*   Created: 2022/11/01 14:43:51 by qjungo            #+#    #+#             */
+/*   Updated: 2022/11/01 14:43:53 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include "libft/libft.h"
+#ifndef NB_H
+# define NB_H
 
-typedef struct s_map {
-	int			x_size;
-	int			y_size;
-	int			size;
-	t_vec3		*vertices;	
-	t_edge		*edges;
-	int			n_edges;
-}	t_map;
+char	*ft_itoa(int n);
+int		ft_atoi(const char *string);
+char	*utoa(unsigned int n);
+char	*itoa_base(unsigned long long int n, char *base, unsigned int n_base);
 
-#endif /* FDF_H */
+#endif /* NB_H */

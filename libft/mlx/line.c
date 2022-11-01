@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 13:12:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:22:15 by qjungo           ###   ########.fr       */
+/*   Created: 2022/11/01 11:27:36 by qjungo            #+#    #+#             */
+/*   Updated: 2022/11/01 14:51:10 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include "libft/libft.h"
+#include "ft_mlx.h"
 
-typedef struct s_map {
-	int			x_size;
-	int			y_size;
-	int			size;
-	t_vec3		*vertices;	
-	t_edge		*edges;
-	int			n_edges;
-}	t_map;
+t_line	new_line(t_vec2 a, t_vec2 b, int color, int thickness)
+{
+	t_line	line;
 
-#endif /* FDF_H */
+	line.a = a;
+	line.b = b;
+	line.color = color;
+	line.thickness = thickness;
+	return (line);
+}
+

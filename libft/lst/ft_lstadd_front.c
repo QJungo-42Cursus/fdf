@@ -6,16 +6,16 @@
 /*   By: qjungo <qjungo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 11:11:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 13:04:50 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 13:42:10 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *n)
 {
-	new->next = *lst;
-	*lst = new;
+	n->next = *lst;
+	*lst = n;
 }
 /*
  * ft_lstadd_frontPrototypevoid

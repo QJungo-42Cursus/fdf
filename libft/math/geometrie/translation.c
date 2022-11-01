@@ -6,20 +6,14 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:13:07 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 10:45:41 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:34:35 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../ft_math.h"
 
-#include "ft_math.h"
-#include <math.h>
-#include <stdlib.h>
-
-
-
-//		This fonction is used to translate a matrix
-//		by a vector
-//		but apply the translation on the original matrix
+//		This fonction is used to translate a matrix by a vector
+//		and apply the translation on the original matrix
 void	translation_3d(t_vec3 *vertices, int length, t_vec3 vec)
 {
 	int			y;

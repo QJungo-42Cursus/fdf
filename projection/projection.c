@@ -6,11 +6,10 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:21:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 12:06:58 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:24:46 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_math/ft_math.h"
 #include "../fdf.h"
 #include "projection.h"
 #include <math.h>

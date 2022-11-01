@@ -6,14 +6,14 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:21:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/31 14:56:09 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 15:25:04 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../ft_math/ft_math.h"
 #include <math.h>
 #include <stdlib.h>
+#include "../libft/libft.h"
 
 static t_matrix	iso_matrix_1(float alpha)
 {

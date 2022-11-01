@@ -6,23 +6,23 @@
 /*   By: qjungo <qjungo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 11:10:51 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 13:03:49 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 13:41:56 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *n)
 {
 	t_list	*ptr;
 
 	ptr = ft_lstlast(*lst);
 	if (ptr == NULL)
 	{
-		*lst = new;
+		*lst = n;
 		return ;
 	}
-	ptr->next = new;
+	ptr->next = n;
 }
 
 /*

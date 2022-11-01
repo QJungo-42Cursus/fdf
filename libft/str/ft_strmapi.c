@@ -6,11 +6,11 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 20:52:49 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 13:01:00 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:45:30 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "str.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
