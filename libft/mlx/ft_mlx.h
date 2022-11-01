@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:09:40 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 16:55:22 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		close_on_esc(int key, t_mlx *mlx);
 int		close_on_destroy(t_mlx *mlx);
 
 typedef enum e_key {
-	ESC = 53,
+	KEY_ESC = 53,
 	KEY_A = 0, 
 	KEY_S = 1,
 	KEY_D = 2,

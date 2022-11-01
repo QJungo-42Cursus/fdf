@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:21:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 15:24:46 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 16:41:31 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,40 @@
 #include <math.h>
 #include <stdlib.h>
 
-
-
-
-/*
-t_vec3	*projection(t_map *map)
+static t_vec2	*perspective(t_vec3 *vertices, int size, t_view view)
 {
-	t_vec2		*res;
-	//t_matrix	iso;
-	t_matrix	point;
-	//t_matrix	new_p;
-	int			i;
+	t_vec2	*proj;
+	float	z;
+	int		i;
 
-	res = malloc(sizeof(t_vec2) * (map->x_size * map->y_size));
-	if (res == NULL)
+	proj = malloc(sizeof(t_vec2) * size);
+	if (proj == NULL)
 		return (NULL);
-
-
-	//iso = iso_matrix(asin(tan(deg_to_rad(30))), 45);
-	//log_matrix(iso);
-
-
 	i = 0;
-	while (i < map->x_size * map->y_size)
+	while (i < size)
 	{
-		point = vec3_to_matrix(map->vertices[i]);
-		if (point.self == NULL)
-			return (NULL);
-		//new_p = matrix_product(iso, point);
-		//log_matrix(new_p);
-		//res[i] = new_vec2(0, 0);
-		//res[i] = new_vec2(new_p.self[0][0]+dec, new_p.self[1][0]+dec);
-		res[i] = new_vec2(point.self[0][0], point.self[1][0]);
-		//log_vec2(res[i]);
+		z = 1 / (view.distance - vertices[i].z);
+		proj[i] = new_vec2(vertices[i].x * z, vertices[i].y * z);
 		i++;
 	}
-
-	return (res);
+	return (proj);
 }
-*/
+
+t_vec2	*projection(t_map *map, t_view view)
+{
+	t_vec3		*map_copy;
+	t_vec2		*proj;
+
+	map_copy = copy_vec3_list(map->vertices, map->size);
+	map_rotation_z(map_copy, map->size, view.angle.z);
+	map_rotation_x(map_copy, map->size, view.angle.x);
+
+	if (view.perspective)
+		proj = perspective(map_copy, map->size, view);
+	else
+		proj = copy_vec3_list_to2(map_copy, map->size);
+
+	map_scale(proj, map->size, view.scale * view.distance);
+	translation_2d(proj, map->size, view.mov);
+	return (proj);
+}
