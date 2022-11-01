@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:35:34 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/29 00:35:34 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 12:10:42 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,51 @@ t_vec2	vec3_to2(t_vec3 v)
 	n.x = v.x;
 	n.y = v.y;
 	return (n);
+}
+
+t_vec3	vec2_to3(t_vec2 v)
+{
+	t_vec3	n;
+
+	n.x = v.x;
+	n.y = v.y;
+	n.z = 0;
+	return (n);
+}
+
+#include <stdlib.h>
+t_vec3	*copy_vec3(t_vec3 *src, int size)
+{
+	t_vec3	*dst;
+	int		i;
+
+	dst = malloc(sizeof(t_vec3) * size);
+	if (dst == NULL)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return (dst);
+}
+
+t_vec2	*copy_vec3_to2(t_vec3 *src, int size)
+{
+	t_vec2	*dst;
+	int		i;
+
+	dst = malloc(sizeof(t_vec2) * size);
+	if (dst == NULL)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		dst[i] = vec3_to2(src[i]);
+		i++;
+	}
+	return (dst);
 }
 
 #include <stdio.h>

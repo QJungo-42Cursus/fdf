@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/29 00:23:16 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 11:31:27 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ typedef struct	s_img_data {
 
 
 
-typedef struct	s_line_data {
-	t_vec2	p_a;
-	t_vec2	p_b;
+typedef struct	s_line {
+	t_vec2	a;
+	t_vec2	b;
 	int		color; // Plus mettre l'info de la couleur de chaque point ?
 	int		thickness;
-}	t_line_data;
+}	t_line;
 
 
 /// EVENT HANDLING 
@@ -79,11 +79,12 @@ enum e_key {
 ///
 ///
 
-void	draw_line(t_img_data *img, t_line_data line);
+void	draw_line(t_img_data *img, t_line line);
 void	display(t_map *map);
 void	pixel_to_image(t_img_data *img, t_vec2 point, int color);
 int		close_on_esc(int key, t_mlx *mlx);
 int		close_on_destroy(t_mlx *mlx);
+t_line	new_line(t_vec2 a, t_vec2 b, int color, int thickness); // TODO sep ?
 
 #endif /* DISPLAY_H */
 

@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/29 00:39:35 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 12:17:52 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,27 @@
 void	disp_edge(t_map *map, t_img_data *img)
 {
 	int			i;
-	t_line_data	line;
-	(void)img;
+	t_line		line;
 	t_vec2		a;
 	t_vec2		b;
+	t_vec3		*pro;
+	t_vec2		*proj;
 
+	pro = copy_vec3(map->vertices, map->size);
 
-	t_vec2 *pro;
-	// TODO wtf pk ca plante ???
-	pro = projection(map);
-	(void)pro;
+	map_rotation_z(pro, map->size, 45);
+	map_rotation_x(pro, map->size, 45);
+
+	proj = copy_vec3_to2(pro, map->size);
+	map_scale(proj, map->size, 50);
+	translation_2d(proj, map->size, new_vec2(500, 500));
 
 	i = 0;
-	int scale = 10;
 	while (i < map->n_edges)
 	{
-		//a = vec3_to2(map->vertices[map->edges[i].a]);
-		//b = vec3_to2(map->vertices[map->edges[i].b]);
-		a = pro[map->edges[i].a];
-		b = pro[map->edges[i].b];
-		log_vec2(a);
-		log_vec2(b);
-		a.x *= scale;
-		a.y *= scale;
-		b.x *= scale;
-		b.y *= scale;
-		line.p_a = a;
-		line.p_b = b;
-		line.color = 0x00FF6550;
-		line.thickness = 2;
+		a = proj[map->edges[i].a];
+		b = proj[map->edges[i].b];
+		line = new_line(a, b, 0x00FF6550, 2);
 #ifdef LOGd
 		log_vec2(a);
 		log_vec2(b);
@@ -74,6 +66,7 @@ void	display(t_map *map)
 	mlx.self = mlx_init();
 	// Init a mlx window
 	mlx.win = mlx_new_window(mlx.self, 1920, 1080, "FDF");
+
 	
 	// Create a image
 	img.x_size = 1920;

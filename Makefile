@@ -8,6 +8,7 @@ SRCS =		main.c \
 			read_map/log.c \
 			read_map/create_edges.c \
 			display/display.c \
+			display/line.c \
 			display/pixel_to_image.c \
 			display/event.c \
 			display/draw_line.c \
@@ -16,6 +17,7 @@ SRCS =		main.c \
 			ft_math/new_.c \
 			ft_math/matrix.c \
 			ft_math/geometrie.c \
+			ft_math/translation.c \
 			projection/projection.c \
 			projection/iso_matrix.c
 
@@ -29,12 +31,12 @@ MAC_L =		-L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 LINUX_L =	-L./minilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 
 $(NAME): $(OBJS)
-	@make bonus -C libft
+	make -C libft
 ifeq ($(shell uname), Linux)
-	@make -C minilibx-linux
+	make -C minilibx-linux
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LINUX_L) -o $(NAME)
 else
-	@make -C minilibx_macos
+	make -C minilibx_macos
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MAC_L) -o $(NAME)
 endif
 
@@ -61,7 +63,7 @@ re: fclean all
 .PHONY: all clean fclean re libft
 
 test: $(OBJS)
-	@make bonus -C libft
+	@make -C libft
 ifeq ($(shell uname), Linux)
 	@make -C minilibx-linux
 	$(CC) $(CFLAGS) -g $(OBJS) $(LIBFT) $(LINUX_L) -o $(NAME)

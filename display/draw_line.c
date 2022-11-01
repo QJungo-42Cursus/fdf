@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 16:01:17 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 11:47:22 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,24 @@ static int	check_max(float x, float y, t_img_data img)
 	return (0);
 }
 
-static void	first_calculs(t_line_data *line, t_vec2 *pixel, t_droite *droite)
+static void	first_calculs(t_line *line, t_vec2 *pixel, t_droite *droite)
 {
-	pixel->x = line->p_a.x;
-	pixel->y = line->p_a.y;
-	droite->m = slope(line->p_a, line->p_b);
+	pixel->x = line->a.x;
+	pixel->y = line->a.y;
+	droite->m = slope(line->a, line->b);
 	droite->b = ordonnate_to_origin(pixel->x, pixel->y, droite->m);
-	droite->move_factor = 0.1f;
-	if (line->p_a.x > line->p_b.x) // TODO ca marche mais j'aurais mis dans l'autre sens...
-		droite->move_factor = -0.1f;
+	// TODO meilleur algo pour le choix de l'incrément
+	droite->move_factor = 0.001f;
+	if (line->a.x > line->b.x) // TODO ca marche mais j'aurais mis dans l'autre sens...
+		droite->move_factor = -0.001f;
 }
 
-static void	loop(t_vec2 pixel, t_line_data line, t_droite droite, t_img_data *img)
+static void	loop(t_vec2 pixel, t_line line, t_droite droite, t_img_data *img)
 {
 	t_vec2	last_pixel;
 
 	last_pixel = new_vec2(-1, -1);
-	while (!assert_rounded_vec2(pixel, line.p_b))
+	while (!assert_rounded_vec2(pixel, line.b))
 	{
 #ifdef LOG
 		printf("start : [ {%f, %f},", line.p_a.x, line.p_a.y);
@@ -65,9 +66,9 @@ static void	loop(t_vec2 pixel, t_line_data line, t_droite droite, t_img_data *im
 	}
 }
 
-static void	inf_loop(t_vec2 pixel, t_line_data line, t_img_data *img)
+static void	inf_loop(t_vec2 pixel, t_line line, t_img_data *img)
 {
-	while (pixel.y != line.p_b.y)
+	while (pixel.y != line.b.y)
 	{
 		// Do the calculation
 		pixel.y = pixel.y + 1;
@@ -79,8 +80,8 @@ static void	inf_loop(t_vec2 pixel, t_line_data line, t_img_data *img)
 	}
 }
 
-#include<stdlib.h>
-void	draw_line(t_img_data *img, t_line_data line)
+//#include<stdlib.h>
+void	draw_line(t_img_data *img, t_line line)
 {
 	t_droite	droite;
 	t_vec2		pixel;

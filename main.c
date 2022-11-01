@@ -8,19 +8,16 @@
 #include "projection/projection.h"
 
 
-
-#define PI 3.141592654
-
-static void	test(int run)
+static int	test(int run)
 {
 	if (!run)
-		return ;
+		return (0);
 	printf("%f \n\n", asin(0.57735));
-	float dg_rad = 30 * 2 * PI / 360;
+	float dg_rad = 30 * 2 * M_PI / 360;
 	printf("%f \n\n", tan(dg_rad));
 	t_matrix uu = iso_matrix(35.264, 45);
 	log_matrix(uu);
-	return ;
+	return (1);
 
 	float	**yo;
 	// [y][x]
@@ -52,6 +49,7 @@ static void	test(int run)
 
 	t_matrix o = matrix_product(m, n);
 	log_matrix(o);
+	return (1);
 }
 
 static int	chec_args(int argc, char **argv)
@@ -85,9 +83,12 @@ int	main(int argc, char **argv)
 
 	map = malloc(sizeof(t_map));
 	if (map == NULL)
-	{}
-	test(0);
-		//return (0);
+	{
+		// TODO
+		return (0);
+	}
+	if (test(0))
+		return (0);
 	if (chec_args(argc, argv))
 		return (0);
 	s_errno = read_map(argv[1], map);
@@ -96,10 +97,7 @@ int	main(int argc, char **argv)
 		ft_printf("Erreur %i lors de la lecture de la map (%s)", s_errno, argv[1]); 
 		return (0);
 	}
-	//	TODO -> separer (dans vertex) la position et la projection
 	create_edges(map);
-
-
 
 
 	display(map);

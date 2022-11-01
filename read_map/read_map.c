@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/10/28 23:10:25 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/01 11:58:24 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	read_map(const char *path, t_map *map)
 	map->x_size = get_x_size(start_lines_list);
 	map->vertices = malloc(sizeof(t_vec3) * (map->x_size * map->y_size));
 	parse_lines(&start_lines_list, map);
+	map->size = map->x_size * map->y_size;
 
 	//log_final_map(map);
 	return (0);
