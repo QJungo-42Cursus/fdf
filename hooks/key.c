@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:00:56 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 15:43:36 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 18:15:38 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	mov(int keycode, t_all *all)
 
 	//if (all->mlx->self && all->img)
 	//	mlx_destroy_image(all->mlx->self, all->img);
-static void	close_window(t_all *all)
+int	close_window(t_all *all)
 {
 	if (all->mlx->self && all->mlx->win)
 		mlx_destroy_window(all->mlx->self, all->mlx->win);
@@ -74,6 +74,7 @@ static void	close_window(t_all *all)
 	free(all->map->edges);
 	free(all->map);
 	exit(0);
+	return (0);
 }
 
 int	key_hook(int keycode, t_all *all)

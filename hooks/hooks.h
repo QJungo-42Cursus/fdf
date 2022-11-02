@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:00:18 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 15:52:56 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 18:15:50 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../fdf.h"
 
+int		close_window(t_all *all);
 int		key_hook(int keycode, t_all *all);
 
 #endif /* HOOKS_H */

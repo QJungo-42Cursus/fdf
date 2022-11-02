@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 17:20:43 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 18:15:14 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 #include "../minilibx_macos/mlx.h"
 #include "projection.h"
 
-//screen->x = 1920;
-//screen->y = 1080;
 static void	init_window(t_mlx *mlx, t_img_data *img, t_vec2 *screen)
 {
-	screen->x = 1280;
-	screen->y = 720;
+	screen->x = 2550;
+	screen->y = 1350;
 	mlx->self = mlx_init();
 	mlx->win = mlx_new_window(mlx->self, screen->x, screen->y, "FDF");
 	img->x_size = screen->x;
@@ -70,7 +68,7 @@ static void	init_view(t_view *view, t_map *map, t_vec2 screen)
 	middle = (map->vertices[map->size - 1].x - map->vertices[0].x)
 		/ 2 * view->scale;
 	view->mov = new_vec2(screen.x / 2 - middle,
-			(screen.y /2  - diag_size / 2) / 4);
+			(screen.y / 2 - diag_size / 2) / 4);
 }
 
 static t_all	*init_all(t_map *map, t_view *view, t_img_data *img, t_mlx *mlx)
@@ -101,6 +99,7 @@ void	display(t_map *map)
 	projection(map, view);
 	init_view(&view, map, screen);
 	render_next_frame(all);
+	mlx_hook(mlx.win, ON_DESTROY, 0, close_window, all);
 	mlx_key_hook(mlx.win, key_hook, all);
 	mlx_loop(mlx.self);
 	free(all);
