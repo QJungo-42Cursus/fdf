@@ -70,6 +70,7 @@ SRCS_MEM =		ft_calloc.c \
 SRCS_MATH = 	geometrie/line.c \
 				geometrie/translation.c \
 				geometrie/map_op.c \
+				geometrie/conversions.c \
 				matrix/operations.c \
 				matrix/conversions.c \
 				matrix/new.c \

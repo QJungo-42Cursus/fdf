@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:31:50 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 14:14:01 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 10:15:23 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 float	op(t_matrix a, t_matrix b, int x, int y)
 {
-	// 0 0
 	int		i;
 	float	res;
-	
+
 	i = 0;
 	res = 0;
 	while (i < a.x)
@@ -28,7 +27,6 @@ float	op(t_matrix a, t_matrix b, int x, int y)
 	}
 	return (res);
 }
-
 
 // produit de matrice
 t_matrix	matrix_product(t_matrix a, t_matrix b)
@@ -87,7 +85,6 @@ t_matrix	element_wise_matrix_multiplication(t_matrix a, t_matrix b)
 	}
 	return (n);
 }
-
 
 t_matrix	matrix_addition(t_matrix a, t_matrix b)
 {

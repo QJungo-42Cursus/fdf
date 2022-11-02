@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:13:07 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 21:59:07 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 10:17:00 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	translation_3d(t_vec3 *vertices, int length, t_vec3 vec)
 	int			y;
 	t_matrix	translation_matrix;
 	t_matrix	new_matrix;
-	
+
 	y = 0;
 	while (y < length)
 	{
@@ -38,7 +38,7 @@ void	translation_2d(t_vec2 *vertices, int length, t_vec2 vec)
 	t_matrix	translation_matrix;
 	t_matrix	new_matrix;
 	t_matrix	tmp;
-	
+
 	y = 0;
 	while (y < length)
 	{

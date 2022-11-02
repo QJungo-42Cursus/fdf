@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:31:50 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 22:00:00 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 10:15:50 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_matrix	init_matrix(int x, int y)
 
 void	free_matrix(t_matrix matrix)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (i < matrix.y)

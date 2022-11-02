@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 19:59:45 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 21:27:39 by qjungo           ###   ########.fr       */
+/*   Created: 2022/11/02 10:21:08 by qjungo            #+#    #+#             */
+/*   Updated: 2022/11/02 10:24:10 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
-#include "../minilibx_macos/mlx.h"
+#include <math.h>
 
-
-/*
-int		close_on_esc(int key, t_all *all)
+float	deg_to_rad(float deg)
 {
-	//if (key != KEY_ESC)
-	//	return (0);
-	if (key != 65307)
-		return (0);
-	close_window(all);
-	return (0);
+	return (deg * M_PI / 180);
 }
 
-*/
+float	rad_to_deg(float rad)
+{
+	return (rad * 180 / M_PI);
+}

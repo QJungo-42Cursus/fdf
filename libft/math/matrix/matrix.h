@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:23:49 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 14:10:39 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 10:16:45 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 ///			[1, 2, 3],
 ///			[1, 3, 4],
 ///			[4, 5, 2]
-///		}	
-typedef struct	s_matrix {
-	int		x; // TODO change to width
-	int		y; // TODO change to width
+///		}	 
+// TODO change to width
+typedef struct s_matrix {
+	int		x;
+	int		y;
 	float	**self;
 }	t_matrix;
 
@@ -43,6 +44,5 @@ t_vec2		matrix_to_vec2(t_matrix matrix);
 t_vec3		matrix_to_vec3(t_matrix matrix);
 t_matrix	vec3_to_matrix(t_vec3 vec);
 t_matrix	vec2_to_matrix(t_vec2 vec);
-
 
 #endif /* MATRIX_H */

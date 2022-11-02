@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 21:28:56 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 11:03:22 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	init_window(t_mlx *mlx, t_img_data *img, t_vec2 *screen)
 static void	init_view(t_view *view)
 {
 	// TODO calcule pour que ce soit au centre
-	view->angle = new_vec3(45, 0, 45);
+
+	view->angle = new_vec3(-45, 0, 45);
 	view->mov = new_vec2(0, 0);
 	view->scale = 50;
 	view->distance = 10;

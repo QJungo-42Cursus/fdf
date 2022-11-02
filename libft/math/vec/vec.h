@@ -6,19 +6,19 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:53:48 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 13:54:53 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 10:14:09 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC_H
 # define VEC_H
 
-typedef struct	s_vec2 {
+typedef struct s_vec2 {
 	float	x;
 	float	y;
 }	t_vec2;
 
-typedef struct	s_vec3 {
+typedef struct s_vec3 {
 	float	x;
 	float	y;
 	float	z;

@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 21:41:40 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 11:15:43 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,90 +15,22 @@
 #include "../fdf.h"
 #include "../libft/libft.h"
 
-static int	get_lines(int fd, t_list **start_lines_list, t_map *map)
+static int	part1(t_map *map, t_list **start_lines_list,
+		int fd)
 {
-	t_list	*new_node;
-	char	*line;
-
-	while (1)
+	map->x_size = 0;
+	map->y_size = 0;
+	*start_lines_list = NULL;
+	if (get_lines(fd, start_lines_list, map))
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		new_node = ft_lstnew((void *)line);
-		if (new_node == NULL)
-		{
-			ft_lstclear(start_lines_list, free);
-			return (1);
-		}
-		ft_lstadd_back(start_lines_list, new_node);
-		map->y_size++;
+		ft_lstclear(start_lines_list, free);
+		return (1);
 	}
-	return (0);
-}
-
-static int	get_x_size(t_list *line)
-{
-	char	**words;
-	int		size;
-
-	words = ft_split((char *)line->content, ' ');
-	if (words == NULL)
-		return (0);
-	size = 0;
-	while (words[size] && words[size][0] != '\n')
+	map->x_size = get_x_size(*start_lines_list);
+	if (map->x_size == 0)
 	{
-		free(words[size]);
-		size++;
-	}
-	free(words[size]);
-	free(words);
-	return (size);
-}
-
-static int	line_to_vertices(char ***words, t_map *map, int *i, int y)
-{
-	int		x;
-
-	x = 0;
-	while ((*words)[x] && (*words)[x][0] != '\n')
-	{
-		map->vertices[*i] = new_vec3(x, y, ft_atoi((*words)[x]));
-		map->vertices[*i] = new_vec3(x, y, ft_atoi((*words)[x]));
-		free((*words)[x]);
-		x++;
-		(*i)++;
-	}
-	free((*words)[x]);
-	free(*words);
-	return (0);
-}
-
-static int	parse_lines(t_list **start_lines_list, t_map *map)
-{
-	t_list	*node;
-	t_list	*l_node;
-	char	**words;
-	int		y;
-	int		i;
-
-	node = *start_lines_list;
-	i = 0;
-	y = 0;
-	while (node)
-	{
-		words = ft_split((char *)node->content, ' ');
-		if (words == NULL)
-		{
-			ft_lstclear(&node, free);
-			return (1);
-		}
-		line_to_vertices(&words, map, &i, y);
-		y++;
-		l_node = node;
-		node = node->next;
-		free(l_node->content);
-		free(l_node);
+		ft_lstclear(start_lines_list, free);
+		return (2);
 	}
 	return (0);
 }
@@ -111,20 +43,8 @@ int	read_map(const char *path, t_map *map)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	map->x_size = 0;
-	map->y_size = 0;
-	start_lines_list = NULL;
-	if (get_lines(fd, &start_lines_list, map))
-	{
-		ft_lstclear(&start_lines_list, free);
+	if (part1(map, &start_lines_list, fd))
 		return (1);
-	}
-	map->x_size = get_x_size(start_lines_list);
-	if (map->x_size == 0)
-	{
-		ft_lstclear(&start_lines_list, free);
-		return (2);
-	}
 	map->size = map->x_size * map->y_size;
 	map->vertices = malloc(sizeof(t_vec3) * (map->x_size * map->y_size));
 	if (map->vertices == NULL)
@@ -136,4 +56,3 @@ int	read_map(const char *path, t_map *map)
 	parse_lines(&start_lines_list, map);
 	return (0);
 }
-

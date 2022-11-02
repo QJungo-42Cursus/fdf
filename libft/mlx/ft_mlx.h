@@ -6,22 +6,23 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 20:24:51 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 10:03:15 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DISPLAY_H
-# define DISPLAY_H
+#ifndef FT_MLX_H
+# define FT_MLX_H
+
 # include "../math/ft_math.h"
 
 /// MLX
 
-typedef struct	s_mlx {
+typedef struct s_mlx {
 	void	*self;
 	void	*win;
 }	t_mlx;
 
-typedef struct	s_img_data {
+typedef struct s_img_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -31,10 +32,10 @@ typedef struct	s_img_data {
 	int		y_size;
 }	t_img_data;
 
-typedef struct	s_line {
+typedef struct s_line {
 	t_vec2	a;
 	t_vec2	b;
-	int		color; // Plus mettre l'info de la couleur de chaque point ?
+	int		color;
 	int		thickness;
 }	t_line;
 
@@ -52,15 +53,15 @@ typedef enum e_event_type {
 	ON_MOUSEDOWN = 4,
 	ON_MOUSEUP = 5,
 	ON_MOUSEMOVE = 6,
-	ON_LEAVE = 8, // TODO what ?
+	ON_LEAVE = 8,
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17,
-	ON_RESIZE = 25, // TODO request en vrai
+	ON_RESIZE = 25,
 }	t_event_type;
 
 typedef enum e_key {
 	KEY_ESC = 53,
-	KEY_A = 0, 
+	KEY_A = 0,
 	KEY_S = 1,
 	KEY_D = 2,
 	KEY_F = 3,
@@ -108,4 +109,4 @@ typedef enum e_key {
 	KEY_UP		= 126,
 }	t_key;
 
-#endif /* DISPLAY_H */
+#endif /* FT_MLX_H */
