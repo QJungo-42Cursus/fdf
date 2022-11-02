@@ -6,16 +6,13 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 21:22:48 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 16:12:04 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 15:47:29 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include "math/ft_math.h"
 # include "char/char.h"
 # include "prt/prt.h"

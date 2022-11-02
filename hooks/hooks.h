@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:00:18 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 13:46:01 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 15:52:56 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../fdf.h"
 
-void	reset_view(t_view *view);
 int		key_hook(int keycode, t_all *all);
 
 #endif /* HOOKS_H */

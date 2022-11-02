@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:48 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 11:23:03 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 16:16:45 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static int	chec_args(int argc, char **argv)
 	}
 	if (ft_strncmp(&(argv[1][len - 4]), ".fdf", 4))
 	{
-		ft_printf("Le programme n'accepte que les fichiers de type \'.fdf\'\n",
-			&(argv[1][len - 4]));
+		ft_printf("Le programme n'accepte que les fichiers \'.fdf\'\n");
 		return (1);
 	}
 	return (0);
@@ -62,8 +61,5 @@ int	main(int argc, char **argv)
 	}
 	create_edges(map);
 	display(map);
-	free(map->vertices);
-	free(map->edges);
-	free(map);
 	return (0);
 }

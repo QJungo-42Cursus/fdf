@@ -6,10 +6,11 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 08:40:45 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 13:14:17 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 15:49:50 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "../t_word.h"
 #include "../conversions/conversions.h"
 #include "../../../libft.h"

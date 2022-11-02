@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 14:57:03 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 17:20:43 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 #include "../minilibx_macos/mlx.h"
 #include "projection.h"
 
+//screen->x = 1920;
+//screen->y = 1080;
 static void	init_window(t_mlx *mlx, t_img_data *img, t_vec2 *screen)
 {
-	screen->x = 1920;
-	screen->y = 1080;
+	screen->x = 1280;
+	screen->y = 720;
 	mlx->self = mlx_init();
 	mlx->win = mlx_new_window(mlx->self, screen->x, screen->y, "FDF");
 	img->x_size = screen->x;
@@ -30,27 +32,45 @@ static void	init_window(t_mlx *mlx, t_img_data *img, t_vec2 *screen)
 			&img->line_length, &img->endian);
 }
 
+/*
 static float	hypotenuse(float a, float b)
 // TODO math.h !!
 {
 	return (sqrt(pow(a, 2) + pow(b, 2)));
 }
+*/
 
-static void	init_view(t_view *view, t_map *map)
-// TODO calcule pour que ce soit au centre
+static t_view	new_view(t_vec3 angle, t_vec2 mov, float scale, float distance)
 {
-	float		diag_size;
-	float		screen_diag;
+	t_view	n;
 
-	diag_size = hypotenuse(map->y_size, map->x_size);
-	screen_diag = hypotenuse(1920, 1080);
-	view->angle = new_vec3(-45, 0, -45);
-	view->mov = new_vec2(500, 500);
-	view->scale = screen_diag / diag_size / 5;
-	view->distance = 10;
-	view->perspective = FALSE;
-	printf("diag size %f \n\n", diag_size);
-	printf("scale : %f\n\n", view->scale);
+	n.angle = angle;
+	n.mov = mov;
+	n.scale = scale;
+	n.distance = distance;
+	n.perspective = FALSE;
+	return (n);
+}
+
+static void	init_view(t_view *view, t_map *map, t_vec2 screen)
+{
+	static t_bool	first = TRUE;
+	float			diag_size;
+	float			middle;
+
+	*view = new_view(new_vec3(-45, 0, -45), new_vec2(0, 0), 0, 10);
+	if (first)
+	{
+		first = FALSE;
+		return ;
+	}
+	diag_size = distance(vec3_to2(map->vertices[0]),
+			vec3_to2(map->vertices[map->size - 1]));
+	view->scale = screen.y / diag_size / 1.2;
+	middle = (map->vertices[map->size - 1].x - map->vertices[0].x)
+		/ 2 * view->scale;
+	view->mov = new_vec2(screen.x / 2 - middle,
+			(screen.y /2  - diag_size / 2) / 4);
 }
 
 static t_all	*init_all(t_map *map, t_view *view, t_img_data *img, t_mlx *mlx)
@@ -77,7 +97,9 @@ void	display(t_map *map)
 
 	all = init_all(map, &view, &img, &mlx);
 	init_window(&mlx, &img, &screen);
-	init_view(&view, map);
+	init_view(&view, map, screen);
+	projection(map, view);
+	init_view(&view, map, screen);
 	render_next_frame(all);
 	mlx_key_hook(mlx.win, key_hook, all);
 	mlx_loop(mlx.self);

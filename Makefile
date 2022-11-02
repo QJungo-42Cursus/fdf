@@ -1,6 +1,6 @@
 NAME =		fdf
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror #-lm TODO math ?
+CFLAGS =	-Wall -Wextra -Werror
 RM =		rm -f
 LIBFT =		-L./libft -lft
 SRCS =		main.c \
@@ -10,11 +10,9 @@ SRCS =		main.c \
 			projection/display.c \
 			projection/projection.c \
 			projection/render.c \
-			hooks/new.c \
 			hooks/key.c
 
 OBJS =		$(SRCS:.c=.o)
-
 
 all: $(NAME)
 
@@ -51,7 +49,6 @@ endif
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
 
 test: $(OBJS)
 	@make -C libft
@@ -63,10 +60,6 @@ else
 	$(CC) $(CFLAGS) -g $(OBJS) $(LIBFT) $(MAC_L) -o $(NAME)
 endif
 	clear
-	./fdf test_maps/tq1.fdf
-#@lldb --batch -K lldb.batch -o run ./fdf test_maps/tq1.fdf
-#./fdf test_maps/10-70.fdf
-#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
-#@lldb --batch -K lldb.batch -o run ./fdf test_maps/100-6.fdf
-#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-70.fdf
-#@lldb --batch -K lldb.batch -o run ./fdf test_maps/10-2.fdf
+	./fdf test_maps/42.fdf
+
+.PHONY: all clean fclean re libft test

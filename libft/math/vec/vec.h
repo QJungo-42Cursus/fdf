@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:53:48 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 10:14:09 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 15:11:49 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_vec2		vec3_to2(t_vec3 v);
 //			copy
 t_vec3		*copy_vec3_list(t_vec3 *src, int size);
 t_vec2		*copy_vec2_list(t_vec2 *src, int size);
-t_vec2		*copy_vec3_list_to2(t_vec3 *src, int size);
+void		copy_vec3_list_to2(t_vec3 *src, int size, t_vec2 *dst);
 
 int			assert_rounded_vec2(t_vec2 a, t_vec2 b);
 

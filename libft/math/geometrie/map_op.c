@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:17:02 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 14:37:52 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 16:03:03 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	rotation_3d(t_vec3 *points, int length, float angle, char axe)
 {
 	int		i;
 
-	// TODO
 	angle = deg_to_rad(angle);
-
 	i = 0;
 	while (i < length)
 	{
