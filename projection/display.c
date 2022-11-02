@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 11:03:22 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 14:57:03 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,37 @@ static void	init_window(t_mlx *mlx, t_img_data *img, t_vec2 *screen)
 	screen->y = 1080;
 	mlx->self = mlx_init();
 	mlx->win = mlx_new_window(mlx->self, screen->x, screen->y, "FDF");
-
-	// Create a image and get its addresse
 	img->x_size = screen->x;
 	img->y_size = screen->y;
 	img->img = mlx_new_image(mlx->self, img->x_size, img->y_size);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 }
 
-static void	init_view(t_view *view)
+static float	hypotenuse(float a, float b)
+// TODO math.h !!
 {
-	// TODO calcule pour que ce soit au centre
+	return (sqrt(pow(a, 2) + pow(b, 2)));
+}
 
-	view->angle = new_vec3(-45, 0, 45);
-	view->mov = new_vec2(0, 0);
-	view->scale = 50;
+static void	init_view(t_view *view, t_map *map)
+// TODO calcule pour que ce soit au centre
+{
+	float		diag_size;
+	float		screen_diag;
+
+	diag_size = hypotenuse(map->y_size, map->x_size);
+	screen_diag = hypotenuse(1920, 1080);
+	view->angle = new_vec3(-45, 0, -45);
+	view->mov = new_vec2(500, 500);
+	view->scale = screen_diag / diag_size / 5;
 	view->distance = 10;
 	view->perspective = FALSE;
+	printf("diag size %f \n\n", diag_size);
+	printf("scale : %f\n\n", view->scale);
 }
 
-static t_all *init_all(t_map *map, t_view *view, t_img_data *img, t_mlx *mlx)
+static t_all	*init_all(t_map *map, t_view *view, t_img_data *img, t_mlx *mlx)
 {
 	t_all	*all;
 
@@ -66,15 +77,9 @@ void	display(t_map *map)
 
 	all = init_all(map, &view, &img, &mlx);
 	init_window(&mlx, &img, &screen);
-	init_view(&view);
+	init_view(&view, map);
 	render_next_frame(all);
-
-	// HOOKS
-	//mlx_hook(mlx.win, ON_DESTROY, 0, close_on_esc, all);
 	mlx_key_hook(mlx.win, key_hook, all);
-	
-	// Start the loop
 	mlx_loop(mlx.self);
-
 	free(all);
 }

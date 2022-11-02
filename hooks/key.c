@@ -6,14 +6,15 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:00:56 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 11:17:53 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 14:42:13 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 #include "../minilibx_macos/mlx.h"
 #include "../projection/projection.h"
-#define ROTATION_SPEED 0.11f
+#include "hooks.h"
+#define ROTATION_SPEED 1.0f
 #define MOV_SPEED 30
 
 static int	perspective(int keycode, t_view *view)

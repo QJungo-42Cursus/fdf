@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.h                                            :+:      :+:    :+:   */
+/*   new.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 20:00:18 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 13:46:01 by qjungo           ###   ########.fr       */
+/*   Created: 2022/11/02 13:45:44 by qjungo            #+#    #+#             */
+/*   Updated: 2022/11/02 13:47:57 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HOOKS_H
-# define HOOKS_H
+#include "../fdf.h"
 
-# include "../fdf.h"
-
-void	reset_view(t_view *view);
-int		key_hook(int keycode, t_all *all);
-
-#endif /* HOOKS_H */
+void	reset_view(t_view *view)
+{
+	view->angle = new_vec3(0,0,0);
+	view->mov = new_vec2(0,0);
+	view->scale = 0;
+}

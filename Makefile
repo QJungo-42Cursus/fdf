@@ -9,8 +9,8 @@ SRCS =		main.c \
 			read_map/create_edges.c \
 			projection/display.c \
 			projection/projection.c \
-			projection/iso_matrix.c \
 			projection/render.c \
+			hooks/new.c \
 			hooks/key.c
 
 OBJS =		$(SRCS:.c=.o)

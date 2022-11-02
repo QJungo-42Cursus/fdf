@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 13:12:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/01 20:03:03 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:30:59 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_map {
 	int			y_size;
 	int			size;
 	t_vec3		*vertices;	
+	t_vec2		*proj;
 	t_edge		*edges;
 	int			n_edges;
 }	t_map;
