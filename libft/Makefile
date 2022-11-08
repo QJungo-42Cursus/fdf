@@ -78,7 +78,8 @@ SRCS_MATH = 	geometrie/line.c \
 				vec/copy.c \
 				vec/conversions.c \
 				vec/assert.c \
-				new_.c
+				new_.c \
+				abs.c
 
 SRCS_MLX = 		line.c \
 				line.c \

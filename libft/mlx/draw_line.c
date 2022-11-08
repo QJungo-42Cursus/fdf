@@ -6,9 +6,115 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 10:24:58 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/08 22:23:23 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <math.h>
+#include <stdlib.h>
+#include "ft_mlx.h"
+#include "../libft.h"
+
+#include <stdio.h>
+
+static int	check_max(float x, float y, t_img_data img)
+{
+	if (x < 0 || y < 0)
+		return (1);
+	if (x >= img.x_size || y >= img.y_size)
+		return (1);
+	return (0);
+}
+
+static void	move(t_vec2 *moving_pixel, t_line line, t_bool little, t_bool y_dist_greater)
+{
+	int		xm;
+	int		ym;
+
+	xm = 1;
+	ym = 1;
+	if (line.a.x > line.b.x)
+		xm = -1;
+	if (line.a.y > line.b.y)
+		ym = -1;
+	if (little)
+		if (y_dist_greater)
+			moving_pixel->x += xm;
+		else
+			moving_pixel->y += ym;
+	else
+		if (y_dist_greater)
+			moving_pixel->y += ym;
+		else
+			moving_pixel->x += xm;
+}
+
+static void	loop(t_vec2 moving_pixel, t_line line, t_img_data *img)
+{
+	t_vec2	dist;
+	float	speed;
+	int		cursor;
+	
+	dist = new_vec2(ft_fabs(ft_fabs(line.a.x) - ft_fabs(line.b.x)), ft_fabs(ft_fabs(line.a.y) - ft_fabs(line.b.y)));
+	speed = dist.y / dist.x;
+	if (dist.x > dist.y)
+		speed = dist.x / dist.y;
+	printf("speeeed %.3f (%.1f)\n\n", speed, round(speed));
+	cursor = 0;
+	do
+	{
+		if (check_max(moving_pixel.x, moving_pixel.y, *img))
+			break ;
+		if (moving_pixel.x == line.b.x || moving_pixel.y == line.b.y)
+			break ;
+		pixel_to_image(img, moving_pixel, line.color);
+		move(&moving_pixel, line, FALSE, dist.y > dist.x);
+		cursor++;
+		if (cursor == round(speed))
+		{
+			move(&moving_pixel, line, TRUE, dist.y > dist.x);
+			cursor = 0;
+		}
+	}
+	while (!assert_rounded_vec2(moving_pixel, line.b));
+}
+
+
+static void	straight_loop(t_vec2 moving_pixel, t_line line, t_img_data *img)
+{
+	int		move_factor;
+	
+	move_factor = 1;
+	if (round(line.a.y) == round(line.b.y) && (line.a.x > line.b.x))
+		move_factor = -1;
+	if (round(line.a.x) == round(line.b.x) && (line.a.y > line.b.y))
+		move_factor = -1;
+	while (1)
+	{
+		if (round(line.a.y) == round(line.b.y))
+			moving_pixel.x += move_factor;
+		else
+			moving_pixel.y += move_factor;
+		if (round(moving_pixel.x) == round(line.b.x) && round(moving_pixel.y) == round(line.b.y))
+			break ;
+		if (check_max(moving_pixel.x, moving_pixel.y, *img))
+			break ;
+		pixel_to_image(img, moving_pixel, line.color);
+	}
+}
+
+void	draw_line(t_img_data *img, t_line line)
+{
+	t_vec2		moving_pixel;
+
+	moving_pixel.x = line.a.x;
+	moving_pixel.y = line.a.y;
+	if (round(line.a.x) == round(line.b.x) || round(line.a.y) == round(line.b.y))
+		straight_loop(moving_pixel, line, img);
+	else
+		loop(moving_pixel, line, img);
+}
+/*
 
 #include <math.h>
 #include <stdlib.h>
@@ -54,18 +160,27 @@ static void	loop(t_vec2 pixel, t_line line, t_droite droite, t_img_data *img)
 	}
 }
 
-static void	inf_loop(t_vec2 pixel, t_line line, t_img_data *img)
+static void	straight_loop(t_vec2 moving_pixel, t_line line, t_img_data *img)
 {
+	int		move_factor;
+	
+	move_factor = 1;
+	if (round(line.a.y) == round(line.b.y) && (line.a.x > line.b.x))
+		move_factor = -1;
+	if (round(line.a.x) == round(line.b.x) && (line.a.y > line.b.y))
+		move_factor = -1;
 	while (1)
 	{
-		pixel.y++;
-		if (round(pixel.x) != round(line.b.x))
+		if (round(line.a.y) == round(line.b.y))
+			moving_pixel.x += move_factor;
+		else
+			moving_pixel.y += move_factor;
+		if (round(moving_pixel.x) == round(line.b.x) && round(moving_pixel.y) == round(line.b.y))
 			break ;
-		if (check_max(pixel.x, pixel.y, *img))
+		if (check_max(moving_pixel.x, moving_pixel.y, *img))
 			break ;
-		pixel_to_image(img, pixel, line.color);
+		pixel_to_image(img, moving_pixel, line.color);
 	}
-	return ;
 }
 
 void	draw_line(t_img_data *img, t_line line)
@@ -75,7 +190,8 @@ void	draw_line(t_img_data *img, t_line line)
 
 	first_calculs(&line, &pixel, &droite);
 	if (isinf(droite.m))
-		inf_loop(pixel, line, img);
+		straight_loop(pixel, line, img);
 	else
 		loop(pixel, line, droite, img);
 }
+*/
