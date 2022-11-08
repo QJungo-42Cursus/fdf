@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/08 22:23:23 by qjungo           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <math.h>
 #include <stdlib.h>
 #include "ft_mlx.h"
@@ -53,10 +41,11 @@ static void	loop(t_vec2 moving_pixel, t_line line, t_img_data *img)
 {
 	t_vec2	dist;
 	float	speed;
-	int		cursor;
+	float	cursor;
 	
 	dist = new_vec2(ft_fabs(ft_fabs(line.a.x) - ft_fabs(line.b.x)), ft_fabs(ft_fabs(line.a.y) - ft_fabs(line.b.y)));
 	speed = dist.y / dist.x;
+	/// TODO ICI
 	if (dist.x > dist.y)
 		speed = dist.x / dist.y;
 	printf("speeeed %.3f (%.1f)\n\n", speed, round(speed));
@@ -65,15 +54,15 @@ static void	loop(t_vec2 moving_pixel, t_line line, t_img_data *img)
 	{
 		if (check_max(moving_pixel.x, moving_pixel.y, *img))
 			break ;
-		if (moving_pixel.x == line.b.x || moving_pixel.y == line.b.y)
+		if (round(moving_pixel.x) == round(line.b.x) || round(moving_pixel.y) == round(line.b.y))
 			break ;
 		pixel_to_image(img, moving_pixel, line.color);
 		move(&moving_pixel, line, FALSE, dist.y > dist.x);
-		cursor++;
-		if (cursor == round(speed))
+		cursor += 1;
+		if (cursor >= speed)
 		{
 			move(&moving_pixel, line, TRUE, dist.y > dist.x);
-			cursor = 0;
+			cursor -= speed;
 		}
 	}
 	while (!assert_rounded_vec2(moving_pixel, line.b));

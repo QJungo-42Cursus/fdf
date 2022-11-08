@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:06:10 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/08 22:38:13 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/08 23:14:00 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	disp_edges(t_map *map, t_img_data *img)
 	}
 }
 
-static void	clean_edges(t_vec2 *vertices,
+void	clean_edges(t_vec2 *vertices,
 		t_edge *edges, int n_edges, t_img_data *img)
 {
 	int		i;
@@ -45,16 +45,16 @@ static void	clean_edges(t_vec2 *vertices,
 	}
 }
 
-static void	background(t_img_data *img, int color)
+void	background(t_img_data *img, int color)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while(y < img->size.y)
+	while(y < img->y_size)
 	{
-		x = 0
-		while (x < img->size.x)
+		x = 0;
+		while (x < img->x_size)
 		{
 			pixel_to_image(img, new_vec2(x, y), color);
 			x++;
@@ -66,7 +66,7 @@ static void	background(t_img_data *img, int color)
 int	render_next_frame(t_all *all)
 {
 	// TODO avoir plusieurs images prete a switch une a une ??
-	background(all->img, 0x00FF0000);
+	//background(all->img, 0x00FFFF00);
 	clean_edges(all->map->proj, all->map->edges, all->map->n_edges, all->img);
 	projection(all->map, *all->view);
 	disp_edges(all->map, all->img);
