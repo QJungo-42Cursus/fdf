@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 08:40:53 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 08:53:15 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 11:06:05 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,15 @@ static void	move(t_vec2 *moving_pixel,
 static void	loop(t_line line, t_img_data *img, t_vec2 dist, float speed)
 {
 	float	cursor;
+	float	color_speed;
 
+	color_speed = ft_fabs(ft_fabs(line.color.start) - ft_fabs(line.color.end));
 	cursor = 0;
 	while (1)
 	{
 		if (check_max(line.a.x, line.a.y, *img))
 			break ;
-		if (round(line.a.x) == round(line.b.x)
-			|| round(line.a.y) == round(line.b.y))
-			break ;
-		pixel_to_image(img, line.a, line.color);
+		pixel_to_image(img, line.a, line.color.start);
 		move(&line.a, line, FALSE, dist.y > dist.x);
 		cursor += 1;
 		if (cursor >= speed)
@@ -87,7 +86,7 @@ static void	straight_loop(t_vec2 moving_pixel, t_line line, t_img_data *img)
 			break ;
 		if (check_max(moving_pixel.x, moving_pixel.y, *img))
 			break ;
-		pixel_to_image(img, moving_pixel, line.color);
+		pixel_to_image(img, moving_pixel, line.color.start);
 	}
 }
 
@@ -103,8 +102,8 @@ void	draw_line(t_img_data *img, t_line line)
 		return (straight_loop(new_vec2(line.a.x, line.a.y), line, img));
 	droite.m = slope(line.a, line.b);
 	droite.b = ordonnate_to_origin(line.a.x, line.a.y, droite.m);
-	offset(new_vec2(img->x_size, img->y_size), &line.a, droite);
-	offset(new_vec2(img->x_size, img->y_size), &line.b, droite);
+	offset(new_vec2(img->size.x, img->size.y), &line.a, droite);
+	offset(new_vec2(img->size.x, img->size.y), &line.b, droite);
 	moving_pixel = new_vec2(line.a.x, line.a.y);
 	dist = new_vec2(ft_fabs(ft_fabs(line.a.x) - ft_fabs(line.b.x)),
 			ft_fabs(ft_fabs(line.a.y) - ft_fabs(line.b.y)));

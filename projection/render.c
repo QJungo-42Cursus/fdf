@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:06:10 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 09:47:46 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 11:05:34 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
 
 static void	disp_edges(t_map *map, t_img_data *img)
 {
-	int		i;
-	t_line	line;
+	int					i;
+	t_line				line;
+	t_color_gradient	color;
 
+	color.start = 0x00FF6550;
+	color.end = 0x00FF6550;
+	color.n = 1;
 	i = 0;
 	while (i < map->n_edges)
 	{
 		line = new_line(map->proj[map->edges[i].a],
-				map->proj[map->edges[i].b], 0x00FF6550, 2);
+				map->proj[map->edges[i].b], color, 2);
 		draw_line(img, line);
 		i++;
 	}
@@ -32,14 +36,18 @@ static void	disp_edges(t_map *map, t_img_data *img)
 void	clean_edges(t_vec2 *vertices,
 		t_edge *edges, int n_edges, t_img_data *img)
 {
-	int		i;
-	t_line	line;
+	int					i;
+	t_line				line;
+	t_color_gradient	color;
 
+	color.start = 0x00000000;
+	color.end = 0x00000000;
+	color.n = 1;
 	i = 0;
 	while (i < n_edges)
 	{
 		line = new_line(vertices[edges[i].a],
-				vertices[edges[i].b], 0x00000000, 0);
+				vertices[edges[i].b], color, 0);
 		draw_line(img, line);
 		i++;
 	}
@@ -51,10 +59,10 @@ void	background(t_img_data *img, int color)
 	int		y;
 
 	y = 0;
-	while (y < img->y_size)
+	while (y < img->size.y)
 	{
 		x = 0;
-		while (x < img->x_size)
+		while (x < img->size.x)
 		{
 			pixel_to_image(img, new_vec2(x, y), color);
 			x++;

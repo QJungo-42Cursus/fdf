@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 08:40:53 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 08:45:02 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 10:59:32 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_max(float x, float y, t_img_data img)
 {
 	if (x < 0 || y < 0)
 		return (1);
-	if (x >= img.x_size || y >= img.y_size)
+	if (x >= img.size.x || y >= img.size.y)
 		return (1);
 	return (0);
 }

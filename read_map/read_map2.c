@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:09:28 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 11:15:03 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 12:41:50 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,12 @@ int	get_lines(int fd, t_list **start_lines_list, t_map *map)
 			return (1);
 		}
 		ft_lstadd_back(start_lines_list, new_node);
-		map->y_size++;
+		map->size.y++;
 	}
 	return (0);
 }
 
-int	get_x_size(t_list *line)
-{
-	char	**words;
-	int		size;
-
-	words = ft_split((char *)line->content, ' ');
-	if (words == NULL)
-		return (0);
-	size = 0;
-	while (words[size] && words[size][0] != '\n')
-	{
-		free(words[size]);
-		size++;
-	}
-	free(words[size]);
-	free(words);
-	return (size);
-}
-
-int	line_to_vertices(char ***words, t_map *map, int *i, int y)
+static int	line_to_vertices(char ***words, t_map *map, int *i, int y)
 {
 	int		x;
 
@@ -73,6 +54,16 @@ int	line_to_vertices(char ***words, t_map *map, int *i, int y)
 	return (0);
 }
 
+static int	words_n(char **words)
+{
+	int		len;
+
+	len = 0;
+	while (words[len] != NULL)
+		len++;
+	return (len);
+}
+
 int	parse_lines(t_list **start_lines_list, t_map *map)
 {
 	t_list	*node;
@@ -87,7 +78,7 @@ int	parse_lines(t_list **start_lines_list, t_map *map)
 	while (node)
 	{
 		words = ft_split((char *)node->content, ' ');
-		if (words == NULL)
+		if (words == NULL || words_n(words) != (int)map->size.x)
 		{
 			ft_lstclear(&node, free);
 			return (1);

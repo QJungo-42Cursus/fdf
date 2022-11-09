@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 15:08:47 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 12:56:16 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,26 @@
 #include "../fdf.h"
 #include "../libft/libft.h"
 
+static int	clean_return(t_list **l, int e)
+{
+	ft_lstclear(l, free);
+	return (e);
+}
+
 static int	part1(t_map *map, t_list **start_lines_list,
 		int fd)
 {
-	map->x_size = 0;
-	map->y_size = 0;
+	map->size.x = 0;
+	map->size.y = 0;
+	map->size.z = 0;
 	*start_lines_list = NULL;
 	if (get_lines(fd, start_lines_list, map))
 	{
 		ft_lstclear(start_lines_list, free);
 		return (1);
 	}
-	map->x_size = get_x_size(*start_lines_list);
-	if (map->x_size == 0)
+	map->size.x = get_x_size(*start_lines_list);
+	if (map->size.x == 0)
 	{
 		ft_lstclear(start_lines_list, free);
 		return (2);
@@ -45,19 +52,16 @@ int	read_map(const char *path, t_map *map)
 		return (-1);
 	if (part1(map, &start_lines_list, fd))
 		return (1);
-	map->size = map->x_size * map->y_size;
-	map->vertices = malloc(sizeof(t_vec3) * map->size);
+	map->xy_size = map->size.x * map->size.y;
+	map->vertices = malloc(sizeof(t_vec3) * map->xy_size);
 	if (map->vertices == NULL)
-	{
-		ft_lstclear(&start_lines_list, free);
-		return (3);
-	}
-	map->proj = malloc(sizeof(t_vec2) * map->size);
+		clean_return(&start_lines_list, 3);
+	map->proj = malloc(sizeof(t_vec2) * map->xy_size);
 	if (map->proj == NULL)
-	{
-		ft_lstclear(&start_lines_list, free);
-		return (3);
-	}
-	parse_lines(&start_lines_list, map);
+		clean_return(&start_lines_list, 3);
+	if (parse_lines(&start_lines_list, map))
+		return (5);
+	elevate_to_zero(map->vertices, map->xy_size);
+	map->size.z = highest_in_the_room(map->vertices, map->xy_size);
 	return (0);
 }

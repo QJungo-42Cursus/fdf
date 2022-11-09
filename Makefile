@@ -6,6 +6,7 @@ LIBFT =		-L./libft -lft
 SRCS =		main.c \
 			read_map/read_map.c \
 			read_map/read_map2.c \
+			read_map/read_map_utils.c \
 			read_map/create_edges.c \
 			projection/display.c \
 			projection/projection.c \

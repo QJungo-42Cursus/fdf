@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 09:49:03 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 12:51:26 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	display(t_map *map)
 	init_view(&view, map, screen);
 	render_next_frame(all);
 	mlx_hook(mlx.win, ON_DESTROY, 0, close_window, all);
-	mlx_key_hook(mlx.win, key_hook, all);
+	mlx_hook(mlx.win, ON_KEYDOWN, 0, key_hook, all);
 	mlx_loop(mlx.self);
 	free(all);
 }
@@ -55,8 +55,8 @@ static void	init_window(t_mlx *mlx, t_img_data *imgs, t_vec2 *screen)
 	i = 0;
 	while (i < IMG_BUFF)
 	{
-		imgs[i].x_size = screen->x;
-		imgs[i].y_size = screen->y;
+		imgs[i].size.x = screen->x;
+		imgs[i].size.y = screen->y;
 		imgs[i].img = mlx_new_image(mlx->self, screen->x, screen->y);
 		imgs[i].addr = mlx_get_data_addr(imgs[i].img, &imgs[i].bits_per_pixel,
 				&imgs[i].line_length, &imgs[i].endian);
@@ -78,16 +78,16 @@ static t_view	new_view(t_vec3 angle, t_vec2 mov, float scale, float distance)
 
 static void	init_view(t_view *view, t_map *map, t_vec2 screen)
 {
-	float			diag_size;
+	float			xy_diag_size;
 	float			middle;
 
-	diag_size = distance(vec3_to2(map->vertices[0]),
-			vec3_to2(map->vertices[map->size - 1]));
-	view->scale = screen.y / diag_size / 1.2;
-	middle = (map->vertices[map->size - 1].x - map->vertices[0].x)
+	xy_diag_size = distance(vec3_to2(map->vertices[0]),
+			vec3_to2(map->vertices[map->xy_size - 1]));
+	view->scale = screen.y / (xy_diag_size + map->size.z) / 1.2;
+	middle = (map->vertices[map->xy_size - 1].x - map->vertices[0].x)
 		/ 2 * view->scale;
 	view->mov = new_vec2(screen.x / 2 - middle,
-			(screen.y / 2 - diag_size / 2) / 4);
+			((screen.y / 2) - (xy_diag_size / 2) + (map->size.z * 40)) / 4);
 }
 
 static t_all	*init_all(t_map *map,
