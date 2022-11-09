@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 08:40:53 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 13:20:58 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:05:22 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	loop(t_line line, t_img_data *img, t_vec2 dist, float speed)
 		color_speed /= dist.y;
 	else
 		color_speed /= dist.x;
-	color_speed /= 
 	cursor = 0;
 	while (1)
 	{

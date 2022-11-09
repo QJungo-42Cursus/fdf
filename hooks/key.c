@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:00:56 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 16:53:17 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:07:15 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ static int	mov(int keycode, t_all *all)
 }
 
 //int	mlx_loop_end(void *mlx_ptr); -> fonctionne sur linux
-int	mlx_loop_end(void *mlx_ptr);
+
+/// La librairy Mlx ne contien ni fonction mlx_loop_end (sauf linux), ni
+/// de hook "atExit"
+/// Est-ce que la fonction exit free tout ce qui a ete alloue automatiquement ?
 int	close_window(t_all *all)
 {
-	//void	*mlx;
-	//mlx = all->mlx->self;
 	if (all->img != NULL)
 		mlx_destroy_image(all->mlx->self, all->img->img);
 	if (all->mlx->win != NULL)
@@ -76,16 +77,10 @@ int	close_window(t_all *all)
 	free(all->map->vertices);
 	free(all->map->proj);
 	free(all->map->edges);
-	//free(all->map); // TODO
-	//mlx_loop_end(mlx);
 	exit (0);
 	return (0);
 }
-/// La librairy Mlx ne contien ni fonction mlx_loop_end (sauf linux), ni
-/// de hook "atExit"
-/// Est-ce que la fonction exit free tout ce qui a ete alloue automatiquement ?
 
-#include<stdio.h>
 /*
  * LINUX CHECK
 printf("%d\n", keycode);
@@ -95,10 +90,6 @@ if (keycode == 65307)//
 
 int	key_hook(int keycode, t_all *all)
 {
-	printf("YAAAA\n\n");
-	printf("eYAAAA\n\n");
-	if (keycode == 65307)//TODO
-		close_window(all);
 	if (keycode == KEY_ESC)
 		close_window(all);
 	else if (mov(keycode, all))

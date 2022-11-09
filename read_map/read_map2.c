@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:09:28 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 16:46:29 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:52:44 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static int	words_n(char **words)
 	len = 0;
 	while (words[len] != NULL)
 		len++;
+	if (words[len - 1][0] == '\n')
+		len--;
 	return (len);
 }
 
@@ -82,10 +84,7 @@ int	parse_lines(t_list **start_lines_list, t_map *map)
 		{
 			i = 0;
 			while (words[i])
-			{
-				free(words[i]);
-				i++;
-			}
+				free(words[i++]);
 			free(words);
 			ft_lstclear(&node, free);
 			return (1);

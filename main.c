@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:21:48 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 16:52:57 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:55:58 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,8 @@ int	main(int argc, char **argv)
 
 	if (chec_args(argc, argv))
 		return (0);
-	//map = malloc(sizeof(t_map));
-	/*
-	if (map == NULL)
-	{
-		ft_printf("Erreur lors de l'allocation de memoire de \"map\"");
-		return (0);
-	}
-	*/
 	if (read_map(argv[1], &map))
-	{
-		//free(map);
-		ft_printf("Erreur lors de la lecture de la map (%s)", argv[1]);
-		return (0);
-	}
+		terminate("Erreur lors de la lecture de la map");
 	create_edges(&map);
 	display(&map);
 	return (0);

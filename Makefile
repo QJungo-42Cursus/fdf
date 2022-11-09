@@ -12,8 +12,7 @@ SRCS =		main.c \
 			projection/display.c \
 			projection/projection.c \
 			projection/render.c \
-			hooks/key.c \
-			hooks/expose.c
+			hooks/key.c
 
 OBJS =		$(SRCS:.c=.o)
 
@@ -76,7 +75,8 @@ san:
 	@make -C libft
 	@make -C $(MLX_REP)
 	$(CC) $(CFLAGS) $(SAN) $(SRCS) $(LIBFT) $(MLX) -o $(NAME) 
-	./fdf test_maps/42.fdf
+	./fdf test_maps/tq3.fdf
+#./fdf test_maps/42.fdf
 
 
 leaks: all

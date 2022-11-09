@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 13:12:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 16:15:11 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:05:47 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_all {
 	t_view		*view;
 	t_img_data	*img;
 	t_mlx		*mlx;
-	//t_bool		is_running;
 }	t_all;
 
 void	terminate(char *s);
