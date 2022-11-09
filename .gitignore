@@ -1,3 +1,4 @@
 *.o
 fdf
 libft.a
+minilibx_macos/libmlx.a

@@ -25,6 +25,7 @@ SRCS_STR =		ft_strmapi.c \
 
 SRCS_NB = 		ft_itoa.c \
 				ft_atoi.c \
+				long_atoi.c \
 				itoa_base.c \
 				utoa.c
 
@@ -78,8 +79,8 @@ SRCS_MATH = 	geometrie/line.c \
 				vec/copy.c \
 				vec/conversions.c \
 				vec/assert.c \
-				new_.c \
-				abs.c
+				abs.c \
+				new_.c
 
 SRCS_MLX = 		line.c \
 				line.c \
