@@ -14,28 +14,30 @@ SRCS =		main.c \
 
 OBJS =		$(SRCS:.c=.o)
 
-all: $(NAME)
+## MLX ##
+ifeq ($(shell uname), Linux)
+MLX =	-L./minilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+else
+MLX =		-L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+endif
 
-MAC_L =		-L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
-LINUX_L =	-L./minilibx-linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+ifeq ($(shell uname), Linux)
+MLX_REP = minilibx-linux
+else
+MLX_REP = minilibx_macos
+endif
+########
+
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft
-ifeq ($(shell uname), Linux)
-	make -C minilibx-linux
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LINUX_L) -o $(NAME)
-else
-	make -C minilibx_macos
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MAC_L) -o $(NAME)
-endif
+	make -C $(MLX_REP)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 
 clean:
 	@make clean -C libft
-ifeq ($(shell uname), Linux)
-	@make clean -C minilibx-linux
-else
-	@make clean -C minilibx_macos 
-endif
+	@make clean -C $(MLX_REP) 
 	$(RM) $(OBJS)
 
 fclean: clean
@@ -52,13 +54,8 @@ re: fclean all
 
 test: $(OBJS)
 	@make -C libft
-ifeq ($(shell uname), Linux)
-	@make -C minilibx-linux
-	$(CC) $(CFLAGS) -g $(OBJS) $(LIBFT) $(LINUX_L) -o $(NAME)
-else
-	@make -C minilibx_macos
-	$(CC) $(CFLAGS) -g $(OBJS) $(LIBFT) $(MAC_L) -o $(NAME)
-endif
+	@make -C $(MLX_REP)
+	$(CC) $(CFLAGS) -g $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 	clear
 	./fdf test_maps/42.fdf
 

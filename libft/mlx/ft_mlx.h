@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:26 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/02 10:03:15 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 08:45:41 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ typedef struct s_line {
 void	draw_line(t_img_data *img, t_line line);
 void	pixel_to_image(t_img_data *img, t_vec2 point, int color);
 t_line	new_line(t_vec2 a, t_vec2 b, int color, int thickness);
+//
+void	offset(t_vec2 img_size, t_vec2 *point, t_droite droite);
+int		check_max(float x, float y, t_img_data img);
 
 /// EVENT HANDLING
 
