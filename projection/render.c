@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:06:10 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 11:05:34 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 14:25:58 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,11 @@ void	background(t_img_data *img, int color)
 
 int	render_next_frame(t_all *all)
 {
-	static int	last_img = 0;
-	int			next_img;
-
-	if (last_img == IMG_BUFF)
-		last_img = 0;
-	next_img = last_img + 1;
-	if (next_img == IMG_BUFF)
-		next_img = 0;
 	clean_edges(all->map->proj, all->map->edges,
-		all->map->n_edges, &all->imgs[last_img]);
+		all->map->n_edges, all->img);
 	projection(all->map, *all->view);
-	disp_edges(all->map, &all->imgs[next_img]);
+	disp_edges(all->map, all->img);
 	mlx_put_image_to_window(all->mlx->self,
-		all->mlx->win, all->imgs[next_img].img, 0, 0);
-	last_img++;
+		all->mlx->win, all->img->img, 0, 0);
 	return (0);
 }

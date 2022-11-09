@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:35:13 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 12:51:26 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 16:12:29 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,51 +17,55 @@
 #include "../minilibx_macos/mlx.h"
 #include "projection.h"
 
-static t_all	*init_all(t_map *map,
-					t_view *view, t_img_data *imgs, t_mlx *mlx);
+static void	init_all(t_map *map, t_view *view, t_img_data *img, t_mlx *mlx, t_all *all);
 static void		init_view(t_view *view, t_map *map, t_vec2 screen);
 static t_view	new_view(t_vec3 angle, t_vec2 mov, float scale, float distance);
-static void		init_window(t_mlx *mlx, t_img_data *imgs, t_vec2 *screen);
+static void		init_window(t_mlx *mlx, t_img_data *img, t_vec2 *screen);
 
+#include <stdio.h>
 void	display(t_map *map)
 {
 	t_mlx		mlx;
-	t_img_data	imgs[IMG_BUFF];
+	t_img_data	img;
 	t_vec2		screen;
 	t_view		view;
-	t_all		*all;
+	t_all		all;
 
-	all = init_all(map, &view, imgs, &mlx);
-	init_window(&mlx, imgs, &screen);
+	init_all(map, &view, &img, &mlx, &all);
+	init_window(&mlx, &img, &screen);
 	view = new_view(new_vec3(-45, 0, -45), new_vec2(0, 0), 0, 10);
 	projection(map, view);
 	init_view(&view, map, screen);
-	render_next_frame(all);
-	mlx_hook(mlx.win, ON_DESTROY, 0, close_window, all);
-	mlx_hook(mlx.win, ON_KEYDOWN, 0, key_hook, all);
-	mlx_loop(mlx.self);
-	free(all);
+	render_next_frame(&all);
+	mlx_hook(mlx.win, ON_DESTROY, 0, close_window, &all);
+	mlx_hook(mlx.win, ON_KEYDOWN, 0, key_hook, &all);
+	mlx_expose_hook(mlx.win, expose_hook, &all);
+
+	// linux
+	mlx_key_hook(mlx.win, key_hook, &all);
+	//
+
+	mlx_loop(all.mlx->self);
 }
 
-static void	init_window(t_mlx *mlx, t_img_data *imgs, t_vec2 *screen)
+static void	init_window(t_mlx *mlx, t_img_data *img, t_vec2 *screen)
 {
-	int		i;
-
 	screen->x = 2550;
 	screen->y = 1350;
+
+	//linux
+	screen->x = 2550 / 4;
+	screen->y = 1350 / 4;
+	//
+	
 	mlx->self = mlx_init();
 	mlx_do_key_autorepeaton(mlx->self);
 	mlx->win = mlx_new_window(mlx->self, screen->x, screen->y, "FDF");
-	i = 0;
-	while (i < IMG_BUFF)
-	{
-		imgs[i].size.x = screen->x;
-		imgs[i].size.y = screen->y;
-		imgs[i].img = mlx_new_image(mlx->self, screen->x, screen->y);
-		imgs[i].addr = mlx_get_data_addr(imgs[i].img, &imgs[i].bits_per_pixel,
-				&imgs[i].line_length, &imgs[i].endian);
-		i++;
-	}
+	img->size.x = screen->x;
+	img->size.y = screen->y;
+	img->img = mlx_new_image(mlx->self, screen->x, screen->y);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 }
 
 static t_view	new_view(t_vec3 angle, t_vec2 mov, float scale, float distance)
@@ -90,17 +94,15 @@ static void	init_view(t_view *view, t_map *map, t_vec2 screen)
 			((screen.y / 2) - (xy_diag_size / 2) + (map->size.z * 40)) / 4);
 }
 
-static t_all	*init_all(t_map *map,
-		t_view *view, t_img_data *imgs, t_mlx *mlx)
+static void	init_all(t_map *map, t_view *view, t_img_data *img, t_mlx *mlx, t_all *all)
 {
-	t_all	*all;
+	//t_all	*all;
 
-	all = malloc(sizeof(t_all));
-	if (!all)
-		return (NULL);
+	//all = malloc(sizeof(t_all));
+	//if (!all)
+	//	return (NULL);
 	all->map = map;
 	all->view = view;
-	all->imgs = imgs;
+	all->img = img;
 	all->mlx = mlx;
-	return (all);
 }

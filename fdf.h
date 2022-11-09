@@ -6,13 +6,12 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 13:12:06 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 12:20:33 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 16:15:11 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define IMG_BUFF 5
 # include "libft/libft.h"
 
 typedef struct s_view {
@@ -35,8 +34,11 @@ typedef struct s_map {
 typedef struct s_all {
 	t_map		*map;
 	t_view		*view;
-	t_img_data	*imgs;
+	t_img_data	*img;
 	t_mlx		*mlx;
+	//t_bool		is_running;
 }	t_all;
+
+void	terminate(char *s);
 
 #endif /* FDF_H */

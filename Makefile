@@ -4,6 +4,7 @@ CFLAGS =	-Wall -Wextra -Werror
 RM =		rm -f
 LIBFT =		-L./libft -lft
 SRCS =		main.c \
+			utils.c \
 			read_map/read_map.c \
 			read_map/read_map2.c \
 			read_map/read_map_utils.c \
@@ -11,7 +12,8 @@ SRCS =		main.c \
 			projection/display.c \
 			projection/projection.c \
 			projection/render.c \
-			hooks/key.c
+			hooks/key.c \
+			hooks/expose.c
 
 OBJS =		$(SRCS:.c=.o)
 
@@ -59,5 +61,29 @@ test: $(OBJS)
 	$(CC) $(CFLAGS) -g $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 	clear
 	./fdf test_maps/42.fdf
+
+ifeq ($(shell uname), Linux)
+LEAKS =	valgrind -q --leak-check=full --track-origins=yes
+else 
+LEAKS = leaks
+endif		
+
+SAN =	-fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all \
+		-fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow \
+		-fno-sanitize=null -fno-sanitize=alignment
+
+san:
+	@make -C libft
+	@make -C $(MLX_REP)
+	$(CC) $(CFLAGS) $(SAN) $(SRCS) $(LIBFT) $(MLX) -o $(NAME) 
+	./fdf test_maps/42.fdf
+
+
+leaks: all
+	clear
+	@#@echo "with bad map";
+	@#$(LEAKS) ./fdf test_maps/tq3.fdf
+	@#@echo "...";
+	@#$(LEAKS) ./fdf test_maps/42.fdf
 
 .PHONY: all clean fclean re libft test

@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.h                                            :+:      :+:    :+:   */
+/*   expose.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 20:00:18 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 14:47:13 by qjungo           ###   ########.fr       */
+/*   Created: 2022/11/09 14:45:30 by qjungo            #+#    #+#             */
+/*   Updated: 2022/11/09 14:47:34 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HOOKS_H
-# define HOOKS_H
 
-# include "../fdf.h"
+#include "../fdf.h"
+#include "../minilibx_macos/mlx.h"
+#include "../projection/projection.h"
+#include "hooks.h"
 
-int		close_window(t_all *all);
-int		key_hook(int keycode, t_all *all);
-int	expose_hook(t_all *all);
 
-#endif /* HOOKS_H */
+
+#include<stdio.h>
+int	expose_hook(t_all *all)
+{
+	printf("EXPOSE\n\n");
+	printf("EXPOSE\n\n");
+	(void)all;
+
+	return (0);
+}

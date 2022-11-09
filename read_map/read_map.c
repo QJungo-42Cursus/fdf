@@ -6,11 +6,12 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 12:56:16 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/09 16:50:10 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <unistd.h>
 #include "read_map.h"
 #include "../fdf.h"
 #include "../libft/libft.h"
@@ -52,6 +53,7 @@ int	read_map(const char *path, t_map *map)
 		return (-1);
 	if (part1(map, &start_lines_list, fd))
 		return (1);
+	close(fd);
 	map->xy_size = map->size.x * map->size.y;
 	map->vertices = malloc(sizeof(t_vec3) * map->xy_size);
 	if (map->vertices == NULL)
@@ -60,7 +62,11 @@ int	read_map(const char *path, t_map *map)
 	if (map->proj == NULL)
 		clean_return(&start_lines_list, 3);
 	if (parse_lines(&start_lines_list, map))
+	{
+		free(map->vertices);
+		free(map->proj);
 		return (5);
+	}
 	elevate_to_zero(map->vertices, map->xy_size);
 	map->size.z = highest_in_the_room(map->vertices, map->xy_size);
 	return (0);
