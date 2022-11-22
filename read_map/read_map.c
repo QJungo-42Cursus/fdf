@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 09:57:22 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 16:50:10 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/22 11:29:24 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	read_map(const char *path, t_map *map)
 	map->proj = malloc(sizeof(t_vec2) * map->xy_size);
 	if (map->proj == NULL)
 		clean_return(&start_lines_list, 3);
-	if (parse_lines(&start_lines_list, map))
+	if (parse_lines(&start_lines_list, map, 0, 0))
 	{
 		free(map->vertices);
 		free(map->proj);

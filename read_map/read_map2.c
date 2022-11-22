@@ -6,7 +6,7 @@
 /*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:09:28 by qjungo            #+#    #+#             */
-/*   Updated: 2022/11/09 17:52:44 by qjungo           ###   ########.fr       */
+/*   Updated: 2022/11/22 11:29:41 by qjungo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,13 @@ static int	words_n(char **words)
 	return (len);
 }
 
-int	parse_lines(t_list **start_lines_list, t_map *map)
+int	parse_lines(t_list **start_lines_list, t_map *map, int i, int y)
 {
 	t_list	*node;
 	t_list	*l_node;
 	char	**words;
-	int		y;
-	int		i;
 
 	node = *start_lines_list;
-	i = 0;
-	y = 0;
 	while (node)
 	{
 		words = ft_split((char *)node->content, ' ');
